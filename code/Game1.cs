@@ -36,11 +36,12 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {   
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        //Draw(Texture2D texture, Rectangle destinationRectangle, Rectangle? sourceRectangle, Color color)
         _spriteBatch.Begin();
-        _gameLoop.Loop( _spriteBatch, _gengSpritesheet); 
+        _gameLoop.Loop( _spriteBatch, _gengSpritesheet); //The drawing of sprites to the spritebatch
+                                                         //should be handled inside of the sprites class
+                                                         //So this method wont be filled with clutter(for loops)
+                                                         //and rectangles from god-knows-where.
         _spriteBatch.End();
-        
         base.Draw(gameTime);
     }
 }
