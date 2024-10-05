@@ -3,7 +3,7 @@ using System.Drawing;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace game.code
+namespace geng
 {
     public class Particle
     {

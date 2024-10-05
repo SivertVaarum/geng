@@ -2,18 +2,18 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace game;
+namespace geng;
 
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private gameLoop _gameLoop = new gameLoop();
+    private Texture2D _gengSpritesheet;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        Texture2D _gengStandard = new Texture2D()
         IsMouseVisible = true;
     }
 
@@ -25,23 +25,22 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        _gengSpritesheet = Content.Load<Texture2D>("gengStandard");
     }
-
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-            _gameLoop.Loop();
+    
+        
         base.Update(gameTime);
     }
     protected override void Draw(GameTime gameTime)
     {   
-    
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        foreach(var Particle in _gameLoop.explosion._particles )
-        {
-            _spriteBatch.Draw();
-        }
+        //Draw(Texture2D texture, Rectangle destinationRectangle, Rectangle? sourceRectangle, Color color)
+        _spriteBatch.Begin();
+        _gameLoop.Loop( _spriteBatch, _gengSpritesheet); 
+        _spriteBatch.End();
+        
         base.Draw(gameTime);
     }
 }

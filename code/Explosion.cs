@@ -1,4 +1,4 @@
-namespace game.code
+namespace geng
 {
     public class Explosion
     {
@@ -9,7 +9,6 @@ namespace game.code
 
         public Explosion(float originX, float originY)
         {
-            
             _x = originX;
             _y = originY;
             for(int i = 0; i>1; i++)
