@@ -8,7 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private GameLoop _gameLoop = new GameLoop();
+    private GameLoop _gameLoop;
     private Texture2D _gengSpritesheet;
     private RenderTarget2D _renderTarget;
     private int _nativeWidth = 918;
@@ -30,6 +30,7 @@ public class Game1 : Game
     {
         base.Initialize();
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
+        _gameLoop = new GameLoop(GraphicsDevice, _gengSpritesheet);
 
     }
 
@@ -40,7 +41,7 @@ public class Game1 : Game
     }
     protected override void Update(GameTime gameTime)
     {
-    
+        _gameLoop.Loop();
         base.Update(gameTime);
     }
     protected override void Draw(GameTime gameTime)
@@ -53,7 +54,7 @@ public class Game1 : Game
 
         //Sets RenderTarget to custom RenderTarget
         GraphicsDevice.SetRenderTarget(_renderTarget);
-        _gameLoop.Loop(_spriteBatch, _gengSpritesheet); 
+        _gameLoop.Draw(_spriteBatch, _gengSpritesheet); 
         _spriteBatch.End();
 
 

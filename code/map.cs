@@ -6,6 +6,7 @@ namespace geng
 {
     public class Map
     {
+        private int _tileDimension = 128;
         private int[,] _map = new[,]//test map
         {
             {1,0,1,0},
@@ -47,6 +48,32 @@ namespace geng
         public void CheckCollision(IEntity entity)
         {
             //Check for collision, resolve using IEntity.ResolveCollision()
+            Rectangle entityRectangle = new Rectangle(entity.getX, entity.getY, entity.GetWidthInt(), entity.GetHeightInt());
+
+            int entityTileX = entityRectangle.X / _tileDimension;
+            int entityTileY = entityRectangle.Y / _tileDimension;
+
+            try
+            {
+                if (_map[entityTileX, entityTileY] == 1)
+                {
+                    entity.ResolveCollision(0, 0);
+                }
+
+            }
+            catch (System.IndexOutOfRangeException e)
+            {
+                
+            }
+
+
+
+
+
+
+
+
+
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -21,10 +22,9 @@ namespace geng
         /// <param name="offSetX"></param>
         /// <param name="offSetY"></param>
         void ResolveCollision(int offSetX, int offSetY);
-        double GetWidth();
-        double GetHeight();
         int GetWidthInt();
         int GetHeightInt();
-        Vector2 GetPosition();
+        int getX { get; }
+        int getY { get; }
     }
 }
