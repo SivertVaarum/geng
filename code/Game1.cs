@@ -10,16 +10,27 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameLoop _gameLoop = new GameLoop();
     private Texture2D _gengSpritesheet;
+    private RenderTarget2D _renderTarget;
+    private int _nativeWidth = 918;
+    private int _nativeHeigth = 515;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        _graphics.PreferredBackBufferHeight = _nativeHeigth;
+        _graphics.PreferredBackBufferWidth = _nativeWidth;
+        _graphics.ApplyChanges();
+        Window.AllowUserResizing = true;
+
     }
 
     protected override void Initialize()
     {
         base.Initialize();
+        _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
+
     }
 
     protected override void LoadContent()
@@ -30,18 +41,28 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
     
-        
         base.Update(gameTime);
     }
     protected override void Draw(GameTime gameTime)
-    {   
+    {
+
+        Rectangle window = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        _spriteBatch.Begin();
-        _gameLoop.Loop( _spriteBatch, _gengSpritesheet); //The drawing of sprites to the spritebatch
-                                                         //should be handled inside of the sprites class
-                                                         //So this method wont be filled with clutter(for loops)
-                                                         //and rectangles from god-knows-where.
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        //Sets RenderTarget to custom RenderTarget
+        GraphicsDevice.SetRenderTarget(_renderTarget);
+        _gameLoop.Loop(_spriteBatch, _gengSpritesheet); 
         _spriteBatch.End();
+
+
+        //Sets renderTarger back to backbuffer
+        GraphicsDevice.SetRenderTarget(null);
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        _spriteBatch.Draw(_renderTarget, window, Color.White);
+        _spriteBatch.End();
+
         base.Draw(gameTime);
     }
 }

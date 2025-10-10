@@ -10,7 +10,7 @@ namespace geng
         {
             {1,0,1,0},
             {0,0,0,0},
-            {1,0,1,0},
+            {1,0,1,1},
             {0,1,0,0}
         };
         
@@ -48,8 +48,5 @@ namespace geng
         {
             //Check for collision, resolve using IEntity.ResolveCollision()
         }
-
-        
-
     }
 }
