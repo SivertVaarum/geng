@@ -8,7 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private gameLoop _gameLoop = new gameLoop();
+    private GameLoop _gameLoop = new GameLoop();
     private Texture2D _gengSpritesheet;
     public Game1()
     {
