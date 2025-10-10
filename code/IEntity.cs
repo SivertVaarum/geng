@@ -20,11 +20,13 @@ namespace geng
         /// </summary>
         /// <param name="offSetX"></param>
         /// <param name="offSetY"></param>
-        void ResolveCollision(int offSetX, int offSetY, Microsoft.Xna.Framework.Color? color);
+        void ResolveCollision(int offSetX, int offSetY);
         int GetWidthInt();
         int GetHeightInt();
         int getX { get; }
         int getY { get; }
+        int getXVelocity{ get; }
+        int getYVelocity { get; }
         Microsoft.Xna.Framework.Rectangle GetRectangle();
     }
 }

@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace geng
 {
-    public class PlayerController
+    public class Controller
     {
         private Player _player;
-        private int _speed = 8;
+        private int _speed = 8;//Cannot exceed 31 as this will break collision system.
 
-        public PlayerController(Player p)
+        public Controller(Player p)
         {
             _player = p;
         }
@@ -19,15 +19,15 @@ namespace geng
             {
                 _player.Move(0, -_speed);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 _player.Move(0, _speed);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 _player.Move(-_speed, 0);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 _player.Move(_speed, 0);
             }

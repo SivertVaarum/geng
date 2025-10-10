@@ -9,10 +9,10 @@ namespace geng
         private int _tileDimension = 128;
         private int[,] _map = new[,]//test map
         {
-            {1,1,1,1},
-            {0,0,0,0},
-            {0,0,0,1},
-            {1,1,0,1}
+            {1,1,1,1,1,1},
+            {0,0,0,0,0,1},
+            {0,0,0,1,0,1},
+            {0,1,0,0,0,1}
         };
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace geng
             }
             return spriteBatch;
         }
-        
+
         /// <summary>
         /// Checks collision for given Entity
         /// and resolves using Entities ResolveCollision()
@@ -52,28 +52,41 @@ namespace geng
 
             int entityTileX = entityRectangle.X / _tileDimension;
             int entityTileY = entityRectangle.Y / _tileDimension;
-            int entityTileXW = (entityRectangle.X + entityRectangle.Width) / _tileDimension;
-            int entityTileYH = (entityRectangle.Y + entityRectangle.Height) / _tileDimension;
- 
+            int entityTileXW = (entityRectangle.X + entityRectangle.Width-1) / _tileDimension;
+            int entityTileYH = (entityRectangle.Y + entityRectangle.Height-1) / _tileDimension;
+
             try //Temp fix
             {
-                if (_map[entityTileY, entityTileX] == 1 
+                if (_map[entityTileY, entityTileX] == 1
                 || _map[entityTileY, entityTileXW] == 1
                 || _map[entityTileYH, entityTileX] == 1
                 || _map[entityTileYH, entityTileXW] == 1)
                 {
-                    entity.ResolveCollision(0, 0, Color.Purple);
+                    int xOverlap = 0;
+                    int yOverlap = 0;
+                    if (entity.getXVelocity == 1)
+                    {
+                        xOverlap = -(entityRectangle.Right - (entityTileX * _tileDimension) - _tileDimension);
+                    }
+                    else if (entity.getXVelocity == -1)
+                    {
+                        xOverlap = (entityTileX * _tileDimension) - entityRectangle.Left + _tileDimension;
+                    }
+                    if (entity.getYVelocity == 1)
+                    {
+                        yOverlap = -(entityRectangle.Bottom - (entityTileY * _tileDimension) - _tileDimension);
+                    }
+                    else if (entity.getYVelocity == -1)
+                    {
+                        yOverlap = (entityTileY * _tileDimension) - entityRectangle.Top + _tileDimension;
+                    }
+                    
+                    entity.ResolveCollision(xOverlap, yOverlap);
                 }
-                else if(_map[entityTileY, entityTileX] == 0
-                && _map[entityTileY, entityTileXW] == 0
-                && _map[entityTileYH, entityTileX] == 0
-                && _map[entityTileYH, entityTileXW] == 0)
-                {
-                    entity.ResolveCollision(0, 0, Color.White);
-                }
+                
             }
-            catch (System.IndexOutOfRangeException e){}
+            catch (System.IndexOutOfRangeException e) { }
 
-        }
+        } 
     }
 }

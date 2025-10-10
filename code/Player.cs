@@ -2,6 +2,7 @@
 using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace geng
 {
@@ -12,7 +13,9 @@ namespace geng
         private Color _color = Color.White;
         private Rectangle _rectangle;
         private Texture2D _texture;
-        private PlayerController _playerController;
+        private Controller _playerController;
+        private int xVelocity;
+        private int yVelocity;
         
         /// <summary>
         /// Player constructor
@@ -24,7 +27,7 @@ namespace geng
         /// <param name="height"></param>
         public Player(Texture2D texture, int x, int y, int width, int height)
         {
-            _playerController = new PlayerController(this);
+            _playerController = new Controller(this);
             _texture = texture;
             _x = x;
             _y = y;
@@ -45,6 +48,14 @@ namespace geng
         public int getY
         {
             get => (int)_y;
+        }
+        public int getXVelocity
+        {
+            get => xVelocity;
+        }
+        public int getYVelocity
+        {
+            get => yVelocity;
         }
         /// <summary>
         /// Returns player height double
@@ -79,14 +90,18 @@ namespace geng
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
+            xVelocity = Math.Sign((int)x);
+            yVelocity = Math.Sign((int)y);
             _x += (int)x;
             _y += (int)y;  
         }
 
-        public void ResolveCollision(int offSetX, int offSetY, Color? color)
+        public void ResolveCollision(int offSetX, int offSetY)
         {
             //TODO resolve collision
-            SetColor(color);
+            
+            _x += offSetX;
+            _y += offSetY;
         }
 
         public void Update()
@@ -99,14 +114,11 @@ namespace geng
         {
             spriteBatch.Draw(_texture, _rectangle, _color);
         }
-        private void SetColor(Color? color)
-        {
-            _color = (Color)color;
-        }
-
+        
         public Rectangle GetRectangle()
         {
             return _rectangle;
         }
+        
     }
 }
