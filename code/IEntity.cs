@@ -1,6 +1,5 @@
-using System.Numerics;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System.Drawing;
+using Microsoft.Xna.Framework;
 
 
 
@@ -21,10 +20,11 @@ namespace geng
         /// </summary>
         /// <param name="offSetX"></param>
         /// <param name="offSetY"></param>
-        void ResolveCollision(int offSetX, int offSetY);
+        void ResolveCollision(int offSetX, int offSetY, Microsoft.Xna.Framework.Color? color);
         int GetWidthInt();
         int GetHeightInt();
         int getX { get; }
         int getY { get; }
+        Microsoft.Xna.Framework.Rectangle GetRectangle();
     }
 }

@@ -1,23 +1,27 @@
 
 using System.Numerics;
-
 using Microsoft.Xna.Framework.Graphics;
-
 using Microsoft.Xna.Framework;
 
 namespace geng
 {
     public class Player : IEntity
-    {
-        private Texture2D _texture;
-        private double _x;
-        private double _y;
-        private Rectangle _rectangle;
-        private int _height = 32;
-        private int _width = 32;
-        private PlayerController _playerController;
+    {   
+        private double _x, _y;
+        private int _height, _width;
         private Color _color = Color.White;
+        private Rectangle _rectangle;
+        private Texture2D _texture;
+        private PlayerController _playerController;
         
+        /// <summary>
+        /// Player constructor
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public Player(Texture2D texture, int x, int y, int width, int height)
         {
             _playerController = new PlayerController(this);
@@ -28,18 +32,24 @@ namespace geng
             _width = width;
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
-        
+        /// <summary>
+        /// Returns position on x axis
+        /// </summary>
         public int getX
         {
             get => (int)_x;
         }
-        
+        /// <summary>
+        /// Returns position on y axis
+        /// </summary>
         public int getY
         {
             get => (int)_y;
         }
-       
-
+        /// <summary>
+        /// Returns player height double
+        /// </summary>
+        /// <returns>_height</returns>
         public double GetHeight()
         {
             return _height;
@@ -49,7 +59,10 @@ namespace geng
         {
             return _height;
         }
-
+        /// <summary>
+        /// Returns player width double
+        /// </summary>
+        /// <returns>_width</returns>
         public double GetWidth()
         {
             return _width;
@@ -59,33 +72,41 @@ namespace geng
         {
             return _width;
         }
-
+        /// <summary>
+        /// Increments player x and y field by supplied arguments
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Move(double x, double y)
         {
             _x += (int)x;
-            _y += (int)y;
+            _y += (int)y;  
         }
 
-        public void ResolveCollision(int offSetX, int offSetY)
+        public void ResolveCollision(int offSetX, int offSetY, Color? color)
         {
             //TODO resolve collision
-            SetColor();
+            SetColor(color);
         }
 
         public void Update()
         {
             _playerController.CheckInput();
-            _rectangle = new Rectangle((int)_x, (int)_y, 64, 64);
+            _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.Draw(_texture, _rectangle, _color);
         }
-        private void SetColor()
+        private void SetColor(Color? color)
         {
-            _color = Color.BlueViolet;
+            _color = (Color)color;
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return _rectangle;
         }
     }
 }

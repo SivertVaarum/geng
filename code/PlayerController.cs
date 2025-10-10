@@ -6,7 +6,7 @@ namespace geng
     public class PlayerController
     {
         private Player _player;
-        private readonly int _speed = 16;
+        private int _speed = 8;
 
         public PlayerController(Player p)
         {

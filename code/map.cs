@@ -9,10 +9,10 @@ namespace geng
         private int _tileDimension = 128;
         private int[,] _map = new[,]//test map
         {
-            {1,0,1,0},
+            {1,1,1,1},
             {0,0,0,0},
-            {1,0,1,1},
-            {0,1,0,0}
+            {0,0,0,1},
+            {1,1,0,1}
         };
         
         /// <summary>
@@ -32,7 +32,7 @@ namespace geng
                     if (_map[j, i] == 1)
                     {
                         //Draw(Texture2D texture, Rectangle destinationRectangle, Rectangle? sourceRectangle, Color color)
-                        spriteBatch.Draw(spriteSheet, new Rectangle(i * 128, j * 128, 128, 128),
+                        spriteBatch.Draw(spriteSheet, new Rectangle(i * _tileDimension, j * _tileDimension, _tileDimension, _tileDimension),
                                             new Rectangle(0, 0, 1, 1), Color.White);
                     }
                 }
@@ -48,31 +48,31 @@ namespace geng
         public void CheckCollision(IEntity entity)
         {
             //Check for collision, resolve using IEntity.ResolveCollision()
-            Rectangle entityRectangle = new Rectangle(entity.getX, entity.getY, entity.GetWidthInt(), entity.GetHeightInt());
+            Rectangle entityRectangle = entity.GetRectangle();
 
             int entityTileX = entityRectangle.X / _tileDimension;
             int entityTileY = entityRectangle.Y / _tileDimension;
-
-            try
+            int entityTileXW = (entityRectangle.X + entityRectangle.Width) / _tileDimension;
+            int entityTileYH = (entityRectangle.Y + entityRectangle.Height) / _tileDimension;
+ 
+            try //Temp fix
             {
-                if (_map[entityTileX, entityTileY] == 1)
+                if (_map[entityTileY, entityTileX] == 1 
+                || _map[entityTileY, entityTileXW] == 1
+                || _map[entityTileYH, entityTileX] == 1
+                || _map[entityTileYH, entityTileXW] == 1)
                 {
-                    entity.ResolveCollision(0, 0);
+                    entity.ResolveCollision(0, 0, Color.Purple);
                 }
-
+                else if(_map[entityTileY, entityTileX] == 0
+                && _map[entityTileY, entityTileXW] == 0
+                && _map[entityTileYH, entityTileX] == 0
+                && _map[entityTileYH, entityTileXW] == 0)
+                {
+                    entity.ResolveCollision(0, 0, Color.White);
+                }
             }
-            catch (System.IndexOutOfRangeException e)
-            {
-                
-            }
-
-
-
-
-
-
-
-
+            catch (System.IndexOutOfRangeException e){}
 
         }
     }
