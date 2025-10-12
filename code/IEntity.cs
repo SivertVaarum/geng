@@ -23,8 +23,8 @@ namespace geng
         void ResolveCollision(int offSetX, int offSetY);
         int GetWidthInt();
         int GetHeightInt();
-        int getX { get; }
-        int getY { get; }
+        int X { get; }
+        int Y { get; }
         int getXVelocity{ get; }
         int getYVelocity { get; }
         Microsoft.Xna.Framework.Rectangle GetRectangle();

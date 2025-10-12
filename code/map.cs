@@ -6,13 +6,22 @@ namespace geng
 {
     public class Map
     {
+        private int _mapHeight, _mapWidth;
+        public int MapHeight
+        {
+            get => _map.GetLength(0) * _tileDimension;
+        }
+        public int MapWidth
+        {
+            get => _map.GetLength(1) * _tileDimension;
+        }
         private int _tileDimension = 128;
         private int[,] _map = new[,]//test map
         {
-            {1,1,1,1,1,1},
+            {1,0,0,0,0,1},
             {0,0,0,0,0,1},
-            {0,0,0,1,0,1},
-            {0,1,0,0,0,1}
+            {1,0,0,0,1,1},
+            {1,1,0,1,1,1}
         };
         
         /// <summary>
@@ -82,11 +91,9 @@ namespace geng
                     }
                     
                     entity.ResolveCollision(xOverlap, yOverlap);
-                }
-                
+                }   
             }
             catch (System.IndexOutOfRangeException e) { }
-
         } 
     }
 }

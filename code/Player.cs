@@ -10,12 +10,19 @@ namespace geng
     {   
         private double _x, _y;
         private int _height, _width;
+        private int xVelocity;
+        private int yVelocity;
         private Color _color = Color.White;
         private Rectangle _rectangle;
         private Texture2D _texture;
         private Controller _playerController;
-        private int xVelocity;
-        private int yVelocity;
+        private GravityObject _gravityObject;
+        public GravityObject GravityObject
+        {
+            get => _gravityObject;
+            set => _gravityObject = value;
+        }
+        
         
         /// <summary>
         /// Player constructor
@@ -27,7 +34,12 @@ namespace geng
         /// <param name="height"></param>
         public Player(Texture2D texture, int x, int y, int width, int height)
         {
-            _playerController = new Controller(this);
+
+            _playerController = new Controller(this, Controller.Type.twoDimensional);
+            if(_playerController.PlayerType == Controller.Type.twoDimensional)
+            {
+                _gravityObject = new GravityObject(this);
+            }
             _texture = texture;
             _x = x;
             _y = y;
@@ -38,14 +50,14 @@ namespace geng
         /// <summary>
         /// Returns position on x axis
         /// </summary>
-        public int getX
+        public int X
         {
             get => (int)_x;
         }
         /// <summary>
         /// Returns position on y axis
         /// </summary>
-        public int getY
+        public int Y
         {
             get => (int)_y;
         }
@@ -98,15 +110,27 @@ namespace geng
 
         public void ResolveCollision(int offSetX, int offSetY)
         {
-            //TODO resolve collision
-            
             _x += offSetX;
             _y += offSetY;
+            if (_playerController.PlayerType == Controller.Type.twoDimensional)
+            {
+                if (offSetY > 0)
+                {
+                    //If the offset is less than 0, the player must have hit a ceiling and should stop rising.
+                    
+                }
+                if(offSetY < 0)
+                {
+                    //If player hits the floor they must stop falling.
+                    _gravityObject.CurrentState = GravityObject.State.grounded;
+                }
+            }   
         }
 
         public void Update()
         {
             _playerController.CheckInput();
+            _gravityObject.Update();
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
 
