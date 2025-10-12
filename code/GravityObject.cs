@@ -8,9 +8,8 @@ namespace geng
     /// </summary>
     public class GravityObject
     {
-        
-        private IEntity _entity;
-        private IParticle _particle;
+
+        private IMoveable _moveable;
         private const int _terminalVelocity = 30;
         private const int _gravityConstant = 6;
         private int _currentYVelocity = 0;
@@ -35,21 +34,22 @@ namespace geng
             get => _currentState;
             set => _currentState = value;
         }
-
-        public GravityObject(IEntity e)
+        /// <summary>
+        /// Makes a new GravityObject tied to supplying argument.
+        /// </summary>
+        /// <param name="e"></param>
+        public GravityObject(IMoveable m)
         {
-            _entity = e;
+            _moveable = m;
         }
-        public GravityObject(IParticle p)
-        {
-            _particle = p;
-        }
-
+        /// <summary>
+        /// Updates the enteties y position using the _currentVelocity var which is incremented using the a gravitational constant.
+        /// </summary>
         public void Update()
         {
             if (_currentState == State.moving)
             {
-                _entity.Move(0, _currentYVelocity);
+                _moveable.Move(0, _currentYVelocity);
                 if (_currentYVelocity < _terminalVelocity)
                 {
                     _currentYVelocity += _gravityConstant; 

@@ -73,19 +73,19 @@ namespace geng
                 {
                     int xOverlap = 0;
                     int yOverlap = 0;
-                    if (entity.getXVelocity == 1)
+                    if (entity.XVelocity == 1)
                     {
                         xOverlap = -(entityRectangle.Right - (entityTileX * _tileDimension) - _tileDimension);
                     }
-                    else if (entity.getXVelocity == -1)
+                    else if (entity.XVelocity == -1)
                     {
                         xOverlap = (entityTileX * _tileDimension) - entityRectangle.Left + _tileDimension;
                     }
-                    if (entity.getYVelocity == 1)
+                    if (entity.YVelocity == 1)
                     {
                         yOverlap = -(entityRectangle.Bottom - (entityTileY * _tileDimension) - _tileDimension);
                     }
-                    else if (entity.getYVelocity == -1)
+                    else if (entity.YVelocity == -1)
                     {
                         yOverlap = (entityTileY * _tileDimension) - entityRectangle.Top + _tileDimension;
                     }

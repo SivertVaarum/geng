@@ -6,47 +6,9 @@ using System;
 
 namespace geng
 {
-    public class Player : IEntity
+    public class Player : IEntity 
     {   
         private double _x, _y;
-        private int _height, _width;
-        private int xVelocity;
-        private int yVelocity;
-        private Color _color = Color.White;
-        private Rectangle _rectangle;
-        private Texture2D _texture;
-        private Controller _playerController;
-        private GravityObject _gravityObject;
-        public GravityObject GravityObject
-        {
-            get => _gravityObject;
-            set => _gravityObject = value;
-        }
-        
-        
-        /// <summary>
-        /// Player constructor
-        /// </summary>
-        /// <param name="texture"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public Player(Texture2D texture, int x, int y, int width, int height)
-        {
-
-            _playerController = new Controller(this, Controller.Type.twoDimensional);
-            if(_playerController.PlayerType == Controller.Type.twoDimensional)
-            {
-                _gravityObject = new GravityObject(this);
-            }
-            _texture = texture;
-            _x = x;
-            _y = y;
-            _height = height;
-            _width = width;
-            _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
-        }
         /// <summary>
         /// Returns position on x axis
         /// </summary>
@@ -61,14 +23,51 @@ namespace geng
         {
             get => (int)_y;
         }
-        public int getXVelocity
+        private int _height, _width;
+        private int _xVelocity, _yVelocity;
+        public int XVelocity
         {
-            get => xVelocity;
+            get => _xVelocity;
         }
-        public int getYVelocity
+        public int YVelocity
         {
-            get => yVelocity;
+            get => _yVelocity;
         }
+        private Color _color = Color.White;
+        private Rectangle _rectangle;
+        private Texture2D _texture;
+        private Controller _playerController;
+        private GravityObject _gravityObject;
+        public GravityObject GravityObject
+        {
+            get => _gravityObject;
+            set => _gravityObject = value;
+        }
+        
+        /// <summary>
+        /// Player constructor
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public Player(Texture2D texture, int x, int y, int width, int height)
+        {
+            _playerController = new Controller(this, Controller.Type.twoDimensional);
+            if(_playerController.PlayerType == Controller.Type.twoDimensional)
+            {
+                _gravityObject = new GravityObject(this);
+            }
+            _texture = texture;
+            _x = x;
+            _y = y;
+            _height = height;
+            _width = width;
+            _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
+        }
+        
+        
         /// <summary>
         /// Returns player height double
         /// </summary>
@@ -102,8 +101,8 @@ namespace geng
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-            xVelocity = Math.Sign((int)x);
-            yVelocity = Math.Sign((int)y);
+            _xVelocity = Math.Sign((int)x);
+            _yVelocity = Math.Sign((int)y);
             _x += (int)x;
             _y += (int)y;  
         }
@@ -143,6 +142,5 @@ namespace geng
         {
             return _rectangle;
         }
-        
     }
 }

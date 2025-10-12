@@ -1,6 +1,6 @@
 namespace geng
 {
-    public interface IParticle
+    public interface IParticle : IMoveable
     {
         
     }
