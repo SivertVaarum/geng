@@ -11,7 +11,7 @@ namespace geng
 
         private IMoveable _moveable;
         private const int _terminalVelocity = 30;
-        private const int _gravityConstant = 6;
+        private const int _gravityConstant = 4;
         private int _currentYVelocity = 0;
         public int CurrentYVelocity
         {

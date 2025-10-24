@@ -13,26 +13,18 @@ namespace geng
         /// <param name="offSetX"></param>
         /// <param name="offSetY"></param>
         void ResolveCollision(int offSetX, int offSetY);
-        /// <summary>
-        /// Returns width
-        /// </summary>
-        /// <returns></returns>
-        int GetWidthInt();
-        /// <summary>
-        /// Retusn height
-        /// </summary>
-        /// <returns></returns>
-        int GetHeightInt();
-        int X { get; }
-        int Y { get; }
+        int Width { get; }
+        int Height { get; }
+        float X { get; set; }
+        float Y { get; set; }
         /// <summary>
         /// Either 1 or -1, responds to if moving left or right
         /// </summary>
-        int XVelocity { get; }
+        float XVelocity { get; }
         /// <summary>
         /// Either 1 or -1, responds to if moving down or up
         /// </summary>
-        int YVelocity { get; }
+        float YVelocity { get; }
         Microsoft.Xna.Framework.Rectangle GetRectangle();
     }
 }

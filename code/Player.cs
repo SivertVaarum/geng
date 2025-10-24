@@ -6,43 +6,53 @@ using System;
 
 namespace geng
 {
-    public class Player : IEntity 
-    {   
-        private double _x, _y;
+    public class Player : IEntity
+    {
+        private const int _maxVelocityIncrement = 4;
+        private float _x, _y;
         /// <summary>
-        /// Returns position on x axis
+        /// Position on x axis
         /// </summary>
-        public int X
+        public float X
         {
-            get => (int)_x;
+            get => _x;
+            set => _y = value;
         }
         /// <summary>
-        /// Returns position on y axis
+        /// Position on y axis
         /// </summary>
-        public int Y
+        public float Y
         {
-            get => (int)_y;
+            get => _y;
+            set => _y = value;
         }
+
         private int _height, _width;
-        private int _xVelocity, _yVelocity;
-        public int XVelocity
+        public int Height
+        {
+            get => _height;
+        }
+        public int Width
+        {
+            get => _width;
+        }
+        private float _xVelocity, _yVelocity;
+        public float XVelocity
         {
             get => _xVelocity;
+            set => _xVelocity = value;
         }
-        public int YVelocity
+        public float YVelocity
         {
             get => _yVelocity;
+            set => _yVelocity = value;
         }
+        private float _drag = 0.5f;
+        
         private Color _color = Color.White;
         private Rectangle _rectangle;
         private Texture2D _texture;
-        private Controller _playerController;
-        private GravityObject _gravityObject;
-        public GravityObject GravityObject
-        {
-            get => _gravityObject;
-            set => _gravityObject = value;
-        }
+        private PlayerController _playerController;
         
         /// <summary>
         /// Player constructor
@@ -54,11 +64,7 @@ namespace geng
         /// <param name="height"></param>
         public Player(Texture2D texture, int x, int y, int width, int height)
         {
-            _playerController = new Controller(this, Controller.Type.twoDimensional);
-            if(_playerController.PlayerType == Controller.Type.twoDimensional)
-            {
-                _gravityObject = new GravityObject(this);
-            }
+            _playerController = new PlayerController(this);
             _texture = texture;
             _x = x;
             _y = y;
@@ -67,33 +73,6 @@ namespace geng
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
         
-        
-        /// <summary>
-        /// Returns player height double
-        /// </summary>
-        /// <returns>_height</returns>
-        public double GetHeight()
-        {
-            return _height;
-        }
-
-        public int GetHeightInt()
-        {
-            return _height;
-        }
-        /// <summary>
-        /// Returns player width double
-        /// </summary>
-        /// <returns>_width</returns>
-        public double GetWidth()
-        {
-            return _width;
-        }
-
-        public int GetWidthInt()
-        {
-            return _width;
-        }
         /// <summary>
         /// Increments player x and y field by supplied arguments
         /// </summary>
@@ -101,35 +80,27 @@ namespace geng
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-            _xVelocity = Math.Sign((int)x);
-            _yVelocity = Math.Sign((int)y);
-            _x += (int)x;
-            _y += (int)y;  
+             
         }
 
         public void ResolveCollision(int offSetX, int offSetY)
         {
+            if (offSetX != 0)//If entity is given an offset it must have hit a wall and velocity should be set to zero
+            {
+                _xVelocity = 0;
+            }
+            if (offSetY != 0)
+            {
+                _yVelocity = 0;
+            }
             _x += offSetX;
             _y += offSetY;
-            if (_playerController.PlayerType == Controller.Type.twoDimensional)
-            {
-                if (offSetY > 0)
-                {
-                    //If the offset is less than 0, the player must have hit a ceiling and should stop rising.
-                    
-                }
-                if(offSetY < 0)
-                {
-                    //If player hits the floor they must stop falling.
-                    _gravityObject.CurrentState = GravityObject.State.grounded;
-                }
-            }   
         }
 
         public void Update()
         {
+            UpdatePosition();
             _playerController.CheckInput();
-            _gravityObject.Update();
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
 
@@ -141,6 +112,37 @@ namespace geng
         public Rectangle GetRectangle()
         {
             return _rectangle;
+        }
+
+        public void IncrementXVelocity(double xIncrement)
+        {
+            if (xIncrement <= _maxVelocityIncrement)
+            {
+                _xVelocity += (int)xIncrement;
+            }
+        }
+
+        public void IncrementYVelocity(double yIncrement)
+        {
+            if (yIncrement <= _maxVelocityIncrement)
+            {
+                _yVelocity += (int)yIncrement;
+            }
+        }
+
+        private void UpdatePosition()
+        {
+            _x += _xVelocity;
+            _y += _yVelocity;
+            ApplyDrag();
+        }
+
+        private void ApplyDrag()
+        {
+            
+            _xVelocity -= _drag * Math.Sign(_xVelocity);
+            _yVelocity -= _drag * Math.Sign(_yVelocity);
+            
         }
     }
 }
