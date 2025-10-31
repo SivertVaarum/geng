@@ -2,13 +2,16 @@
 using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace geng
 {
     public class Player : IEntity
     {
-        private const int _maxVelocityIncrement = 4;
+        private const int _maxVelocityIncrement = 2;
+        private int _maxVelocity = 4;
         private float _x, _y;
         /// <summary>
         /// Position on x axis
@@ -16,7 +19,7 @@ namespace geng
         public float X
         {
             get => _x;
-            set => _y = value;
+            set => _x = value;
         }
         /// <summary>
         /// Position on y axis
@@ -37,18 +40,23 @@ namespace geng
             get => _width;
         }
         private float _xVelocity, _yVelocity;
+        /// <summary>
+        /// XVelocity
+        /// </summary>
         public float XVelocity
         {
-            get => _xVelocity;
+            get => Math.Sign(_xVelocity);
             set => _xVelocity = value;
         }
+        /// <summary>
+        /// YVelocity
+        /// </summary>
         public float YVelocity
         {
-            get => _yVelocity;
+            get => Math.Sign(_yVelocity);
             set => _yVelocity = value;
         }
         private float _drag = 0.5f;
-        
         private Color _color = Color.White;
         private Rectangle _rectangle;
         private Texture2D _texture;
@@ -72,29 +80,37 @@ namespace geng
             _width = width;
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
-        
+
         /// <summary>
-        /// Increments player x and y field by supplied arguments
+        /// Overwrites player x and y field by supplied arguments
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-             
+            _x = (int)x;
+            _y = (int)y;
         }
 
+        /// <summary>
+        /// Offset vars should be supplied to let object know how far it has intersects on each axis.
+        /// </summary>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
         public void ResolveCollision(int offSetX, int offSetY)
         {
-            if (offSetX != 0)//If entity is given an offset it must have hit a wall and velocity should be set to zero
+            if (offSetX != 0)
             {
                 _xVelocity = 0;
+                _x += offSetX;
             }
-            if (offSetY != 0)
+            else if(offSetY != 0)
             {
                 _yVelocity = 0;
+                _y += offSetY;
             }
-            _x += offSetX;
-            _y += offSetY;
+
+            //UpdateKeys(offSetX, offSetY);
         }
 
         public void Update()
@@ -104,26 +120,45 @@ namespace geng
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
 
+        /// <summary>
+        /// Adds sprite to supplied SpriteBatch
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, _rectangle, _color);
         }
-        
+
         public Rectangle GetRectangle()
         {
             return _rectangle;
         }
 
+        /// <summary>
+        /// Increment xVelocity be supplied argument.
+        /// </summary>
+        /// <param name="xIncrement"></param>
         public void IncrementXVelocity(double xIncrement)
         {
+            if(Math.Abs(_xVelocity) >= _maxVelocity)
+            {
+                return;
+            }
             if (xIncrement <= _maxVelocityIncrement)
             {
                 _xVelocity += (int)xIncrement;
             }
         }
-
+        /// <summary>
+        /// Incremnet yVelocity by supplied argument.
+        /// </summary>
+        /// <param name="yIncrement"></param>
         public void IncrementYVelocity(double yIncrement)
         {
+            if(Math.Abs(_yVelocity) >= _maxVelocity)
+            {
+                return;
+            }
             if (yIncrement <= _maxVelocityIncrement)
             {
                 _yVelocity += (int)yIncrement;
@@ -138,11 +173,9 @@ namespace geng
         }
 
         private void ApplyDrag()
-        {
-            
-            _xVelocity -= _drag * Math.Sign(_xVelocity);
-            _yVelocity -= _drag * Math.Sign(_yVelocity);
-            
+        {   
+            if(_xVelocity != 0)_xVelocity -= _drag * Math.Sign(_xVelocity);
+            if(_yVelocity != 0)_yVelocity -= _drag * Math.Sign(_yVelocity);
         }
     }
 }

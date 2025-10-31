@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/Users/Sivert/source/code/C#/geng/game/Content/gengStandard.png</File>
+    <File>C:/Users/Sivert/source/code/C#/geng/game/Content/gengStandard.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

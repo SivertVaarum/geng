@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj": {}
+    "C:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj": {
+    "C:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj",
+        "projectUniqueName": "C:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj",
         "projectName": "geng",
-        "projectPath": "c:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj",
+        "projectPath": "C:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\geng.csproj",
         "packagesPath": "C:\\Users\\Sivert\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\obj\\",
+        "outputPath": "C:\\Users\\Sivert\\source\\code\\C#\\geng\\game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sivert\\AppData\\Roaming\\NuGet\\NuGet.Config"

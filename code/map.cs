@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace geng
 {
@@ -19,11 +20,11 @@ namespace geng
         private int[,] _map = new[,]//test map
         {
             {1,0,0,0,0,1},
-            {0,0,0,0,0,1},
+            {0,0,0,0,0,0},
             {1,0,0,0,1,1},
             {1,1,0,1,1,1}
         };
-        
+
         /// <summary>
         /// Loads map into 2d array
         /// </summary>
@@ -56,44 +57,66 @@ namespace geng
         /// <param name="entity"></param>
         public void CheckCollision(IEntity entity)
         {
-            //Check for collision, resolve using IEntity.ResolveCollision()
-            Rectangle entityRectangle = entity.GetRectangle();
+            Rectangle rect = entity.GetRectangle();
 
-            int entityTileX = entityRectangle.X / _tileDimension;
-            int entityTileY = entityRectangle.Y / _tileDimension;
-            int entityTileXW = (entityRectangle.X + entityRectangle.Width-1) / _tileDimension;
-            int entityTileYH = (entityRectangle.Y + entityRectangle.Height-1) / _tileDimension;
+            // Convert player position to tile coordinates
+            int leftEdge   = Math.Max(0, rect.Left / _tileDimension);
+            int rightEdge  = Math.Min(_map.GetLength(1) - 1, rect.Right / _tileDimension);
+            int topEdge    = Math.Max(0, rect.Top / _tileDimension);
+            int bottomEdge = Math.Min(_map.GetLength(0) - 1, rect.Bottom / _tileDimension);
+            int offX = 0;
+            int offY = 0;
 
-            try //Temp fix
+            for (int y = topEdge; y <= bottomEdge; y++)
             {
-                if (_map[entityTileY, entityTileX] == 1
-                || _map[entityTileY, entityTileXW] == 1
-                || _map[entityTileYH, entityTileX] == 1
-                || _map[entityTileYH, entityTileXW] == 1)
+                for (int x = leftEdge; x <= rightEdge; x++)
                 {
-                    int xOverlap = 0;
-                    int yOverlap = 0;
-                    if (entity.XVelocity == 1)
+                    if (_map[y, x] != 1)
                     {
-                        xOverlap = -(entityRectangle.Right - (entityTileX * _tileDimension) - _tileDimension);
+                        continue;
                     }
-                    else if (entity.XVelocity == -1)
+
+                    // Compute tile boundaries
+                    int tileLeft = x * _tileDimension;
+                    int tileRight = tileLeft + _tileDimension;
+                    int tileTop = y * _tileDimension;
+                    int tileBottom = tileTop + _tileDimension;
+
+                    // Check intersection
+                    if (rect.Right > tileLeft && rect.Left < tileRight && rect.Bottom > tileTop && rect.Top < tileBottom)
                     {
-                        xOverlap = (entityTileX * _tileDimension) - entityRectangle.Left + _tileDimension;
+                        // Compute overlap distances on each side
+                        int overlapLeft = rect.Right - tileLeft;
+                        int overlapRight = tileRight - rect.Left;
+                        int overlapTop = rect.Bottom - tileTop;
+                        int overlapBottom = tileBottom - rect.Top;
+
+                        // Find the smallest overlap (shallowest penetration)
+                        int minXOverlap = (overlapLeft < overlapRight) ? -overlapLeft : overlapRight;
+                        int minYOverlap = (overlapTop < overlapBottom) ? -overlapTop : overlapBottom;
+
+                        // Prioritize shallower axis for resolution
+                        if (Math.Abs(minXOverlap) < Math.Abs(minYOverlap))
+                        {
+                            offX = minXOverlap;
+                        }
+                        else
+                        {
+                            offY = minYOverlap;
+                        }
                     }
-                    if (entity.YVelocity == 1)
-                    {
-                        yOverlap = -(entityRectangle.Bottom - (entityTileY * _tileDimension) - _tileDimension);
-                    }
-                    else if (entity.YVelocity == -1)
-                    {
-                        yOverlap = (entityTileY * _tileDimension) - entityRectangle.Top + _tileDimension;
-                    }
-                    
-                    entity.ResolveCollision(xOverlap, yOverlap);
-                }   
+                }
             }
-            catch (System.IndexOutOfRangeException e) { }
-        } 
+
+            if (offX != 0 || offY != 0)
+            {
+                entity.ResolveCollision(offX, offY);
+            }
+        }
+
+        public void Query(int x, int y)
+        {
+            
+        }
     }
 }

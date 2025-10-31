@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/Users/Sivert/source/code/C#/geng/game/Content/gengStandard.png</SourceFile>
+  <SourceFile>C:/Users/Sivert/source/code/C#/geng/game/Content/gengStandard.png</SourceFile>
   <SourceTime>2025-10-13T23:09:38.2964896+02:00</SourceTime>
-  <DestFile>c:/Users/Sivert/source/code/C#/geng/game/Content/bin/DesktopGL/Content/gengStandard.xnb</DestFile>
-  <DestTime>2025-10-24T22:20:36.6223128+02:00</DestTime>
+  <DestFile>C:/Users/Sivert/source/code/C#/geng/game/Content/bin/DesktopGL/Content/gengStandard.xnb</DestFile>
+  <DestTime>2025-10-29T21:00:37.1648698+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
