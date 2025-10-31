@@ -37,7 +37,7 @@ namespace geng
             }
             if (Keyboard.GetState().IsKeyDown(Keys.T))
             {
-                _player.Move(128, 128);
+                GameLoop.AddParticle(new DropParticle());
             }
         }
         public void disableKey(Keys key)

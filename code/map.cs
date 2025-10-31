@@ -113,10 +113,5 @@ namespace geng
                 entity.ResolveCollision(offX, offY);
             }
         }
-
-        public void Query(int x, int y)
-        {
-            
-        }
     }
 }

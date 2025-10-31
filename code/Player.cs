@@ -1,10 +1,7 @@
-
-using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Runtime.CompilerServices;
+
 
 namespace geng
 {
@@ -13,45 +10,20 @@ namespace geng
         private const int _maxVelocityIncrement = 2;
         private int _maxVelocity = 4;
         private float _x, _y;
-        /// <summary>
-        /// Position on x axis
-        /// </summary>
-        public float X
-        {
-            get => _x;
-            set => _x = value;
-        }
-        /// <summary>
-        /// Position on y axis
-        /// </summary>
-        public float Y
-        {
-            get => _y;
-            set => _y = value;
-        }
-
         private int _height, _width;
-        public int Height
-        {
-            get => _height;
-        }
-        public int Width
-        {
-            get => _width;
-        }
         private float _xVelocity, _yVelocity;
         /// <summary>
-        /// XVelocity
+        /// Returns sign of current velocity on x axis.
         /// </summary>
-        public float XVelocity
+        public int XVelocity
         {
             get => Math.Sign(_xVelocity);
             set => _xVelocity = value;
         }
         /// <summary>
-        /// YVelocity
+        /// Retuns sign of current velocity on y axis.
         /// </summary>
-        public float YVelocity
+        public int YVelocity
         {
             get => Math.Sign(_yVelocity);
             set => _yVelocity = value;
@@ -109,8 +81,6 @@ namespace geng
                 _yVelocity = 0;
                 _y += offSetY;
             }
-
-            //UpdateKeys(offSetX, offSetY);
         }
 
         public void Update()
