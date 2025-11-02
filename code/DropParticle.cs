@@ -1,13 +1,13 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.Dynamic;
 
 namespace geng
 {
     public class DropParticle : IParticle, IEntity
     {
-        private int _xVelocity, _yVelocity;
+        private int _xVelocity, _yVelocity = 4;
         public int XVelocity
         {
             get => Math.Sign(_xVelocity);
@@ -16,14 +16,32 @@ namespace geng
         {
             get => Math.Sign(_yVelocity);
         }
-        
-        private int _maxVelocityIncrement = 2;
+
+        public Texture2D Texture
+        {
+            get => _texture;
+        }
+
         private int _maxVelocity = 8;
-        private int _x, _y;
+        private int _x = 0, _y = 0;
         private int _width, _height;
         private int _framesAlive;
         private Texture2D _texture;
         private Rectangle _rectangle;
+        public Rectangle Rectangle
+        {
+            get => _rectangle;
+        }
+
+        public int X
+        {
+            get => _x;
+        }
+
+        public int Y
+        {
+            get => _y;
+        }
 
         public DropParticle(Texture2D texture, int x, int y, int height, int width)
         {
@@ -35,10 +53,10 @@ namespace geng
             _rectangle = new Rectangle(_x, _y, _width, _height);
             _framesAlive = 0;
         }
-
+        
         public void IncrementXVelocity(double xIncrement)
         {
-            if(_xVelocity <= _maxVelocity && xIncrement <= _maxVelocityIncrement)
+            if(_xVelocity <= _maxVelocity)
             {
                 _xVelocity += (int)xIncrement;
             }
@@ -46,7 +64,7 @@ namespace geng
 
         public void IncrementYVelocity(double yIncrement)
         {
-            if(_yVelocity <= _maxVelocity && yIncrement <= _maxVelocityIncrement)
+            if(_yVelocity <= _maxVelocity)
             {
                 _yVelocity += (int)yIncrement;
             }
@@ -54,9 +72,11 @@ namespace geng
         
         public void Update()
         {
+            _framesAlive++;
+            
+            
             UpdatePosition();
             _rectangle = new Rectangle(_x, _y, _width, _height);
-            
         }
 
         public void Move(double x, double y)
@@ -67,7 +87,8 @@ namespace geng
 
         private void UpdatePosition()
         {
-            ApplyDrag();
+            _x += _xVelocity;
+            _y += _yVelocity;
         }
 
         public void ResolveCollision(int offSetX, int offSetY)
@@ -82,19 +103,6 @@ namespace geng
                 _yVelocity = 0;
                 _y += offSetY;
             }
-        }
-        /// <summary>
-        /// Drag in the context of this particle is just -x^2 + 10
-        /// 
-        /// </summary>
-        private void ApplyDrag()
-        {
-            _x = -(int)Math.Pow(_framesAlive, 2);
-        }
-
-        public Rectangle GetRectangle()
-        {
-            return _rectangle;
         }
     }
 

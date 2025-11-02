@@ -57,7 +57,7 @@ namespace geng
         /// <param name="entity"></param>
         public void CheckCollision(IEntity entity)
         {
-            Rectangle rect = entity.GetRectangle();
+            Rectangle rect = entity.Rectangle;
 
             // Convert player position to tile coordinates
             int leftEdge   = Math.Max(0, rect.Left / _tileDimension);

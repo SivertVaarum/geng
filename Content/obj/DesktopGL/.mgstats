@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"c:/Users/Sivert/source/code/Games/monogame/geng/game/Content/gengStandard.png","c:/Users/Sivert/source/code/Games/monogame/geng/game/Content/bin/DesktopGL/gengStandard.xnb","TextureProcessor","Texture2DContent",677,18629,0,2180179
+"c:/Users/Sivert/source/code/C#/geng/game/Content/gengStandard.png","c:/Users/Sivert/source/code/C#/geng/game/Content/bin/DesktopGL/gengStandard.xnb","TextureProcessor","Texture2DContent",695,18629,0,1620968

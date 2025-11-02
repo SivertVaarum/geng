@@ -1,5 +1,8 @@
 namespace geng
 {
+    /// <summary>
+    /// Interface for objects that should be able to move.
+    /// </summary>
     public interface IMoveable
     {
         /// <summary>

@@ -7,12 +7,12 @@ namespace geng
     public class PlayerController
     {
         private Player _player;
+        private List<Keys> disabledKeys = new List<Keys>();
 
         public PlayerController(Player p)
         {
             _player = p;
         }
-        private List<Keys> disabledKeys = new List<Keys>();
 
         /// <summary>
         /// Detects input from keyboard for player.
@@ -37,7 +37,8 @@ namespace geng
             }
             if (Keyboard.GetState().IsKeyDown(Keys.T))
             {
-                GameLoop.AddParticle(new DropParticle());
+                var p = ParticleMediator.GetInstance().MakeNewParticle(ParticleMediator.ParticleType.Water, _player.X, _player.Y);
+                p.IncrementXVelocity(_player.XVelocity);
             }
         }
         public void disableKey(Keys key)

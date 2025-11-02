@@ -32,6 +32,14 @@ public class Game1 : Game
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
         _gameLoop = new GameLoop(GraphicsDevice, _gengSpritesheet);
 
+        Texture2D result = new Texture2D(GraphicsDevice, 1, 1);
+        Color[] data = new Color[1 * 1];
+
+        _gengSpritesheet.GetData(0, new Rectangle(2, 0, 1, 1), data, 0, data.Length);
+        result.SetData(data);
+        ParticleMediator.GetInstance().SetTextures(result);
+
+
     }
 
     protected override void LoadContent()
@@ -54,7 +62,7 @@ public class Game1 : Game
 
         //Sets RenderTarget to custom RenderTarget
         GraphicsDevice.SetRenderTarget(_renderTarget);
-        _gameLoop.Draw(_spriteBatch, _gengSpritesheet); 
+        _gameLoop.Draw(_spriteBatch); 
         _spriteBatch.End();
 
 

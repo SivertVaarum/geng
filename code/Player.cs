@@ -9,7 +9,17 @@ namespace geng
     {
         private const int _maxVelocityIncrement = 2;
         private int _maxVelocity = 4;
+
         private float _x, _y;
+        public int X
+        {
+            get => (int)_x;
+        }
+        public int Y
+        {
+            get => (int)_y;
+        }
+
         private int _height, _width;
         private float _xVelocity, _yVelocity;
         /// <summary>
@@ -31,6 +41,11 @@ namespace geng
         private float _drag = 0.5f;
         private Color _color = Color.White;
         private Rectangle _rectangle;
+        public Rectangle Rectangle
+        {
+            get => _rectangle;
+        }
+
         private Texture2D _texture;
         private PlayerController _playerController;
         
@@ -97,11 +112,6 @@ namespace geng
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, _rectangle, _color);
-        }
-
-        public Rectangle GetRectangle()
-        {
-            return _rectangle;
         }
 
         /// <summary>
