@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
+using System.ComponentModel;
 
 
 namespace geng
@@ -45,8 +46,12 @@ namespace geng
         {
             get => _rectangle;
         }
-
         private Texture2D _texture;
+        public Texture2D Texture
+        {
+            get => _texture;
+            set => _texture = value;
+        }
         private PlayerController _playerController;
         
         /// <summary>
