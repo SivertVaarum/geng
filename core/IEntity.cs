@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace geng
 {
     /// <summary>
-    /// Interface for game moveable, collidable enteties.
+    /// Interface for moveable, collidable entities.
     /// </summary>
     public interface IEntity
     {

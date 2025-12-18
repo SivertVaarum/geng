@@ -1,7 +1,7 @@
 namespace geng
 {
     /// <summary>
-    /// Interface for objects that should be able to move. Deprecated.
+    /// Interface for objects that should be able to move. Dont use.
     /// </summary>
     public interface IMoveable
     {

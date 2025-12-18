@@ -59,7 +59,7 @@ namespace geng
         {
             Rectangle rect = entity.Rectangle;
 
-            // Convert player position to tile coordinates
+            // Convert entity position to tile coordinates
             int leftEdge   = Math.Max(0, rect.Left / _tileDimension);
             int rightEdge  = Math.Min(_map.GetLength(1) - 1, rect.Right / _tileDimension);
             int topEdge    = Math.Max(0, rect.Top / _tileDimension);

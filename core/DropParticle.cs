@@ -74,7 +74,7 @@ namespace geng
         {
             _framesAlive++;
             
-            
+        
             UpdatePosition();
             _rectangle = new Rectangle(_x, _y, _width, _height);
         }
@@ -95,12 +95,12 @@ namespace geng
         {
             if (offSetX != 0)
             {
-                _xVelocity = 0;
+                //_xVelocity = 0;
                 _x += offSetX;
             }
-            else if (offSetY != 0)
+            if (offSetY != 0)
             {
-                _yVelocity = 0;
+                //_yVelocity = 0;
                 _y += offSetY;
             }
         }
