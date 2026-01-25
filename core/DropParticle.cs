@@ -4,7 +4,10 @@ using Microsoft.Xna.Framework;
 using System.Dynamic;
 
 namespace geng
-{
+{   
+    /// <summary>
+    /// Particle obeying gravity.
+    /// </summary>
     public class DropParticle : IParticle, IEntity
     {
         private int _xVelocity, _yVelocity = 4;
@@ -78,7 +81,7 @@ namespace geng
             UpdatePosition();
             _rectangle = new Rectangle(_x, _y, _width, _height);
         }
-
+        
         public void Move(double x, double y)
         {
             _x = (int)x;
@@ -91,16 +94,21 @@ namespace geng
             _y += _yVelocity;
         }
 
+        /// <summary>
+        /// Resolves collision using given offsets.
+        /// </summary>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
         public void ResolveCollision(int offSetX, int offSetY)
         {
             if (offSetX != 0)
             {
-                //_xVelocity = 0;
+                _xVelocity = 0;
                 _x += offSetX;
             }
             if (offSetY != 0)
             {
-                //_yVelocity = 0;
+                _yVelocity = 0;
                 _y += offSetY;
             }
         }

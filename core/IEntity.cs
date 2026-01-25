@@ -26,7 +26,7 @@ namespace geng
         int YVelocity { get; }
 
         /// <summary>
-        /// Move moveable by x and y
+        /// Move moveable to given arguments.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

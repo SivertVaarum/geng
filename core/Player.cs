@@ -74,7 +74,7 @@ namespace geng
         }
 
         /// <summary>
-        /// Overwrites player x and y field by supplied arguments
+        /// Overwrites player x and y field with supplied arguments
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
