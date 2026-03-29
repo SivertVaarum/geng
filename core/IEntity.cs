@@ -15,6 +15,15 @@ namespace geng
         /// <param name="offSetX"></param>
         /// <param name="offSetY"></param>
         void ResolveCollision(int offSetX, int offSetY);
+        /// <summary>
+        /// Teleport to x, y.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        void Teleport(double x, double y);
+        void IncrementXVelocity(double xIncrement);
+        void IncrementYVelocity(double yIncrement);
+        void Draw(SpriteBatch spriteBatch);
         
         /// <summary>
         /// Either 1 or -1, responds to if moving left or right
@@ -25,21 +34,13 @@ namespace geng
         /// </summary>
         int YVelocity { get; }
 
-        /// <summary>
-        /// Move moveable to given arguments.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        void Move(double x, double y);
-        void IncrementXVelocity(double xIncrement);
-        void IncrementYVelocity(double yIncrement);
         Texture2D Texture { get; }
+        Rectangle Rectangle { get; }
         int X { get; }
         int Y { get; }
 
         void Update();
 
-        Rectangle Rectangle { get; }
 
     }
 }

@@ -1,0 +1,25 @@
+@startuml geng
+
+class IEntity{
+    x
+    y
+    ResolveCollision()
+    Rectangle
+    Texture
+    xVel
+    yVel
+}
+class IParticle{
+    
+}
+class Particle{
+
+}
+class Player{}
+class ParticleMediator{
+    IParticles particles[]
+}
+IEntity -- IParticle 
+IParticle -- Particle
+IEntity -- Player
+ParticleMediator --* IParticle

@@ -12,17 +12,16 @@ namespace geng
     {
         private static ParticleMediator _instance;
         private List<IParticle> _particles = new List<IParticle>();
+        private List<Texture2D> _textures = new List<Texture2D>();
         public List<IParticle> Particles
         {
             get => _particles;
         }
-        private List<Texture2D> _textures = new List<Texture2D>();
         public enum ParticleType
         {
             Blood,
             Water
         }
-
         private ParticleMediator() { }
         /// <summary>
         /// Gets instance of the particleMediator
@@ -36,12 +35,14 @@ namespace geng
             }
             return _instance;
         }
-
+        /// <summary>
+        /// Not sure how this will work yet???
+        /// </summary>
+        /// <param name="textures"></param>
         public void GiveTextures(List<Texture2D> textures)
         {
             _textures = textures;
         }
-
         /// <summary>
         /// Adds a new particle of specified type, with at specifed location.
         /// </summary>
@@ -54,7 +55,6 @@ namespace geng
             _particles.Add(p);
             return p;
         }
-
         /// <summary>
         /// Adds an existing particle to this class.
         /// </summary>
@@ -67,7 +67,6 @@ namespace geng
         {
             _textures.Add(texture);
         }
-
         public void Update()
         {
             foreach (IParticle p in _particles)
@@ -75,7 +74,6 @@ namespace geng
                 p.Update();
             }
         }
-        
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach(IParticle p in _particles)

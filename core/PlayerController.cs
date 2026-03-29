@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace geng
 {
@@ -37,8 +37,7 @@ namespace geng
             }
             if (Keyboard.GetState().IsKeyDown(Keys.T))
             {
-                var p = ParticleMediator.GetInstance().MakeNewParticle(ParticleMediator.ParticleType.Water, _player.X, _player.Y);
-                p.IncrementXVelocity(_player.XVelocity);
+                Explosion explosion = new Explosion(_player.X, _player.Y, new Color(255, 0, 0));
             }
         }
         public void disableKey(Keys key)

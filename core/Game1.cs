@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace geng;
 
@@ -23,12 +22,12 @@ public class Game1 : Game
         _graphics.PreferredBackBufferWidth = _nativeWidth;
         _graphics.ApplyChanges();
         Window.AllowUserResizing = true;
-
     }
 
     protected override void Initialize()
     {
         base.Initialize();
+        GraphicsHelper.Initialize(GraphicsDevice);
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
         _gameLoop = new GameLoop(GraphicsDevice, _gengSpritesheet);
 
@@ -38,8 +37,6 @@ public class Game1 : Game
         _gengSpritesheet.GetData(0, new Rectangle(2, 0, 1, 1), data, 0, data.Length);
         result.SetData(data);
         ParticleMediator.GetInstance().SetTextures(result);
-
-
     }
 
     protected override void LoadContent()
@@ -64,7 +61,6 @@ public class Game1 : Game
         GraphicsDevice.SetRenderTarget(_renderTarget);
         _gameLoop.Draw(_spriteBatch); 
         _spriteBatch.End();
-
 
         //Sets renderTarger back to backbuffer
         GraphicsDevice.SetRenderTarget(null);

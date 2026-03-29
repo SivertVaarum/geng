@@ -40,7 +40,6 @@ namespace geng
             set => _yVelocity = value;
         }
         private float _drag = 0.5f;
-        private Color _color = Color.White;
         private Rectangle _rectangle;
         public Rectangle Rectangle
         {
@@ -78,7 +77,7 @@ namespace geng
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Move(double x, double y)
+        public void Teleport(double x, double y)
         {
             _x = (int)x;
             _y = (int)y;
@@ -116,7 +115,7 @@ namespace geng
         /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, _rectangle, _color);
+            spriteBatch.Draw(_texture, _rectangle, Color.White);
         }
 
         /// <summary>
