@@ -20,7 +20,7 @@ public class Particle : IParticle
         _xVelocity = (int)direction.X;
         _yVelocity = (int)direction.Y;
         _rectangle = new Rectangle(_x, _y, 1, 1);
-        Texture2D _texture = GraphicsHelper.CreateSolid(color);
+        _texture = GraphicsHelper.CreateSolid(color);
     }
     /// <summary>
     /// Create particle without direction.
@@ -31,7 +31,7 @@ public class Particle : IParticle
         _x = originX;
         _y = originY; 
         _rectangle = new Rectangle(_x, _y, 1, 1);
-        Texture2D _texture = GraphicsHelper.CreateSolid(color);
+        _texture = GraphicsHelper.CreateSolid(color);
     }
 
     public Texture2D Texture {
