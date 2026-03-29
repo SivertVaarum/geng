@@ -71,8 +71,9 @@ namespace geng
         {
             foreach (IParticle p in _particles)
             {
-                p.Update();
+                p.Update();  
             }
+            _particles.RemoveAll( IParticle => !IParticle.isAlive());
         }
         public void Draw(SpriteBatch spriteBatch)
         {

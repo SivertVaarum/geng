@@ -5,6 +5,6 @@ namespace geng
 {
     public interface IParticle :  IEntity
     {
-        
+        bool isAlive();
     }
 }

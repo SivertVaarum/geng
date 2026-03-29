@@ -8,10 +8,6 @@ namespace geng
 {
     public class Player : IEntity
     {
-        private const int _maxVelocityIncrement = 2;
-        private int _maxVelocity = 4;
-
-        private float _x, _y;
         public int X
         {
             get => (int)_x;
@@ -21,14 +17,12 @@ namespace geng
             get => (int)_y;
         }
 
-        private int _height, _width;
-        private float _xVelocity, _yVelocity;
         /// <summary>
         /// Returns sign of current velocity on x axis.
         /// </summary>
         public int XVelocity
         {
-            get => Math.Sign(_xVelocity);
+            get => (int)_xVelocity;
             set => _xVelocity = value;
         }
         /// <summary>
@@ -36,22 +30,18 @@ namespace geng
         /// </summary>
         public int YVelocity
         {
-            get => Math.Sign(_yVelocity);
+            get => (int)_yVelocity;
             set => _yVelocity = value;
         }
-        private float _drag = 0.5f;
-        private Rectangle _rectangle;
         public Rectangle Rectangle
         {
             get => _rectangle;
         }
-        private Texture2D _texture;
         public Texture2D Texture
         {
             get => _texture;
             set => _texture = value;
         }
-        private PlayerController _playerController;
         
         /// <summary>
         /// Player constructor
@@ -108,22 +98,18 @@ namespace geng
             _playerController.CheckInput();
             _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
         }
-
         /// <summary>
         /// Adds sprite to supplied SpriteBatch
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void Draw(SpriteBatch spriteBatch)
-        {
+        public void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(_texture, _rectangle, Color.White);
         }
-
         /// <summary>
         /// Increment xVelocity be supplied argument.
         /// </summary>
         /// <param name="xIncrement"></param>
-        public void IncrementXVelocity(double xIncrement)
-        {
+        public void IncrementXVelocity(double xIncrement) {
             if(Math.Abs(_xVelocity) >= _maxVelocity)
             {
                 return;
@@ -137,8 +123,7 @@ namespace geng
         /// Incremnet yVelocity by supplied argument.
         /// </summary>
         /// <param name="yIncrement"></param>
-        public void IncrementYVelocity(double yIncrement)
-        {
+        public void IncrementYVelocity(double yIncrement) {
             if(Math.Abs(_yVelocity) >= _maxVelocity)
             {
                 return;
@@ -149,17 +134,24 @@ namespace geng
             }
         }
 
-        private void UpdatePosition()
-        {
+        private void UpdatePosition() {
             _x += _xVelocity;
             _y += _yVelocity;
             ApplyDrag();
         }
 
-        private void ApplyDrag()
-        {   
+        private void ApplyDrag() {   
             if(_xVelocity != 0)_xVelocity -= _drag * Math.Sign(_xVelocity);
             if(_yVelocity != 0)_yVelocity -= _drag * Math.Sign(_yVelocity);
         }
+        private const int _maxVelocityIncrement = 2;
+        private int _maxVelocity = 4;
+        private float _x, _y;
+        private int _height, _width;
+        private float _xVelocity, _yVelocity;
+        private float _drag = 0.5f;
+        private Rectangle _rectangle;
+        private Texture2D _texture;
+        private PlayerController _playerController;
     }
 }

@@ -95,10 +95,12 @@ namespace geng
             _y = (int)y;
         }
 
-        private void UpdatePosition()
-        {
+        private void UpdatePosition() {
             _x += _xVelocity;
             _y += _yVelocity;
+        }
+        public bool isAlive() {
+            return true;
         }
 
         public void Draw(SpriteBatch spriteBatch)

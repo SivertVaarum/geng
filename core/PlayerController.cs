@@ -39,6 +39,10 @@ namespace geng
             {
                 Explosion explosion = new Explosion(_player.X, _player.Y, new Color(255, 0, 0));
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                Explosion explosion = new Explosion(_player.X, _player.Y, new Vector2(_player.XVelocity, _player.YVelocity), new Color(255, 0, 0));
+            }
         }
         public void disableKey(Keys key)
         {

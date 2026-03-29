@@ -68,11 +68,18 @@ public class Particle : IParticle
         _x += _xVelocity;
         _y += _yVelocity;
         _rectangle = new Rectangle(_x, _y, _texture.Bounds.Width*GraphicsHelper.GetPixelRatio(), _texture.Bounds.Height*GraphicsHelper.GetPixelRatio());
-        return;
+        _timeToLive --;
+    }
+    /// <summary>
+    /// Returns when particle lifespan is over.
+    /// </summary>
+    /// <returns></returns>
+    public bool isAlive() {
+        return _timeToLive > 0;
     }
     private  int _xVelocity, _yVelocity; 
     private int _x, _y;
     private Texture2D _texture;
     private Rectangle _rectangle;
-    private int _timeToLive;
+    private int _timeToLive = 256;
 }
