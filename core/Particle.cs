@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 namespace geng;
 
 /// <summary>
@@ -9,7 +8,7 @@ namespace geng;
 public class Particle : IParticle
 {
     /// <summary>
-    /// Create particle with direction.
+    /// Create particle with vector.
     /// </summary>
     /// <param name="originX"></param>
     /// <param name="originY"></param>
@@ -19,8 +18,7 @@ public class Particle : IParticle
         _y = originY; 
         _xVelocity = (int)direction.X;
         _yVelocity = (int)direction.Y;
-        _rectangle = new Rectangle(_x, _y, 1, 1);
-        _texture = GraphicsHelper.CreateSolid(color);
+        _texture = GraphicsHelper.CreateSolid(color, 1, 1);
     }
     /// <summary>
     /// Create particle without direction.
@@ -30,10 +28,8 @@ public class Particle : IParticle
     public Particle(int originX, int originY, Color color) {
         _x = originX;
         _y = originY; 
-        _rectangle = new Rectangle(_x, _y, 1, 1);
-        _texture = GraphicsHelper.CreateSolid(color);
+        _texture = GraphicsHelper.CreateSolid(color, 1, 1);
     }
-
     public Texture2D Texture {
         get => _texture;
     }
@@ -49,39 +45,34 @@ public class Particle : IParticle
     public int Y {
         get => _y;
     }
-
     public Rectangle Rectangle {
         get => _rectangle;
     }
-
     public void ResolveCollision(int offSetX, int offSetY) {
-        throw new System.NotImplementedException();
+        //¯\_(ツ)_/¯
     }
-
-    public void Draw(SpriteBatch spriteBatch)
-    {
+    public void Draw(SpriteBatch spriteBatch) {
         spriteBatch.Draw(_texture, _rectangle, Color.White);
     }
-
     public void Teleport(double x, double y) {
         _x = (int)x;
         _y = (int)y;
     }
-
     public void IncrementXVelocity(double xIncrement) {
         _xVelocity += (int)xIncrement;
     }
-
     public void IncrementYVelocity(double yIncrement) {
         _yVelocity += (int)yIncrement;
     }
-
     public void Update() {
         _x += _xVelocity;
         _y += _yVelocity;
+        _rectangle = new Rectangle(_x, _y, _texture.Bounds.Width*GraphicsHelper.GetPixelRatio(), _texture.Bounds.Height*GraphicsHelper.GetPixelRatio());
+        return;
     }
     private  int _xVelocity, _yVelocity; 
     private int _x, _y;
     private Texture2D _texture;
     private Rectangle _rectangle;
+    private int _timeToLive;
 }

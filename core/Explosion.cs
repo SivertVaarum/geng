@@ -17,7 +17,7 @@ public class Explosion
     public Explosion(int originX, int originY, Color color) {
         for(int i = 0; i < 10 ; i++){
             float angle = (float)(random.NextDouble() * Math.PI * 2);
-            Vector2 vector = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * SPEED;       
+            Vector2 vector = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * (int)(SPEED * random.NextDouble() + 5);       
 
             particleMediator.AddParticle(new Particle(originX, originY, vector, color));
         }     
@@ -25,10 +25,4 @@ public class Explosion
     private ParticleMediator particleMediator = ParticleMediator.GetInstance();
     private const int SPEED = 20;
     private Random random = new Random();
-
-
-
-
-
-
 }

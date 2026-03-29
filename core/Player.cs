@@ -69,7 +69,7 @@ namespace geng
             _y = y;
             _height = height;
             _width = width;
-            _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
+            _rectangle = new Rectangle((int)_x, (int)_y, _texture.Bounds.Width*GraphicsHelper.GetPixelRatio(), _texture.Bounds.Height*GraphicsHelper.GetPixelRatio());
         }
 
         /// <summary>

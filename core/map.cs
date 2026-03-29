@@ -6,7 +6,6 @@ namespace geng
 {
     public class Map
     {
-        private int _mapHeight, _mapWidth;
         public int MapHeight
         {
             get => _map.GetLength(0) * _tileDimension;
@@ -14,22 +13,6 @@ namespace geng
         public int MapWidth
         {
             get => _map.GetLength(1) * _tileDimension;
-        }
-        private int _tileDimension = 128;
-        private int[,] _map = new[,]//test map
-        {
-            {1,0,0,0,0,1},
-            {0,0,0,0,0,0},
-            {1,0,0,0,1,1},
-            {1,1,0,1,1,1}
-        };
-
-        /// <summary>
-        /// Loads map into 2d array
-        /// </summary>
-        private void LoadMap()
-        {
-            //TODO, load maps from seperate files that will be written into the _map array.
         }
 
         public SpriteBatch Draw(SpriteBatch spriteBatch, Texture2D spriteSheet)
@@ -42,7 +25,7 @@ namespace geng
                     {
                         //Draw(Texture2D texture, Rectangle destinationRectangle, Rectangle? sourceRectangle, Color color)
                         spriteBatch.Draw(spriteSheet, new Rectangle(i * _tileDimension, j * _tileDimension, _tileDimension, _tileDimension),
-                                            new Rectangle(0, 0, 1, 1), Color.White);
+                                            new Rectangle(0, 4, 4, 4), Color.White);
                     }
                 }
             }
@@ -111,6 +94,24 @@ namespace geng
             {
                 entity.ResolveCollision(offX, offY);
             }
+        }
+
+        private int _tileDimension = GraphicsHelper.GetTileDimension();
+        private int _mapHeight, _mapWidth;
+        private int[,] _map = new[,]//test map
+        {
+            {1,0,0,0,0,1},
+            {0,0,0,0,0,0},
+            {1,0,0,0,1,1},
+            {1,1,0,1,1,1}
+        };
+
+        /// <summary>
+        /// Loads map into 2d array
+        /// </summary>
+        private void LoadMap()
+        {
+            //TODO, load maps from seperate files that will be written into the _map array.
         }
     }
 }

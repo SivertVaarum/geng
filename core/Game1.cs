@@ -28,6 +28,8 @@ public class Game1 : Game
     {
         base.Initialize();
         GraphicsHelper.Initialize(GraphicsDevice);
+        GraphicsHelper.SetTileDimension(128);
+        GraphicsHelper.SetPixelRatio(32);
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
         _gameLoop = new GameLoop(GraphicsDevice, _gengSpritesheet);
 
