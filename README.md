@@ -9,8 +9,9 @@ basic light/dark lighting system using ligth sources, tilemaps and <br>
 probably some other things Ill think of later .
 
 ## Run
-Requires dotnet and Monogame <br>
-run using: dotnet run <br>
+Requires .NET and Monogame <br>
+
+
 
 <br><br>
 *most features not yet implemented.
