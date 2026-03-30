@@ -1,9 +1,9 @@
-using System;
 using Microsoft.Xna.Framework;
+using System;
 namespace geng;
 
 /// <summary>
-/// Particle explosion class. (Particle factory)
+/// Creates an explosion effect. ParticleMediator.Update() and .Draw() has to be called in your main loop.
 /// </summary>
 public class Explosion
 {
@@ -16,7 +16,6 @@ public class Explosion
         for(int i = 0; i < 10 ; i++){
             float angle = (float)(random.NextDouble() * Math.PI * 2);
             Vector2 vector = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * (int)(SPEED * random.NextDouble() + 5);       
-
             particleMediator.AddParticle(new Particle(originX, originY, vector, color));
         }     
     }
@@ -34,11 +33,13 @@ public class Explosion
 
         for(int i = 0; i < 5 ; i++){
             float finalAngle = angle + randomOffset;
-            Vector2 vector = new Vector2((float)Math.Cos(finalAngle), (float)Math.Sin(finalAngle)) * (int)(SPEED * random.NextDouble() + 5);       
-            particleMediator.AddParticle(new Particle(originX, originY, vector, color));
+            Vector2 vector = new Vector2((float)Math.Cos(finalAngle), (float)Math.Sin(finalAngle)) * (int)(SPEED * random.NextDouble() + 5);  
+            Particle p = new Particle(originX, originY, vector, color);
+            particleMediator.AddParticle(p);
         }     
     }
     private ParticleMediator particleMediator = ParticleMediator.GetInstance();
     private const int SPEED = 20;
     private Random random = new Random();
+    
 }

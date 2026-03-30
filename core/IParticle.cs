@@ -1,10 +1,10 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+namespace geng;
 
-namespace geng
+public interface IParticle :  IEntity
 {
-    public interface IParticle :  IEntity
-    {
-        bool isAlive();
-    }
+    /// <summary>
+    /// For particles to be GCed, this should indicate when time to live has ran out.
+    /// </summary>
+    /// <returns></returns>
+    bool isAlive();
 }

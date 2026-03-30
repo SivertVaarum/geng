@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 namespace geng;
 
-public class Game1 : Game
+internal class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -32,13 +31,6 @@ public class Game1 : Game
         GraphicsHelper.SetPixelRatio(32);
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
         _gameLoop = new GameLoop(GraphicsDevice, _gengSpritesheet);
-
-        Texture2D result = new Texture2D(GraphicsDevice, 1, 1);
-        Color[] data = new Color[1 * 1];
-
-        _gengSpritesheet.GetData(0, new Rectangle(2, 0, 1, 1), data, 0, data.Length);
-        result.SetData(data);
-        ParticleMediator.GetInstance().SetTextures(result);
     }
 
     protected override void LoadContent()
@@ -48,12 +40,11 @@ public class Game1 : Game
     }
     protected override void Update(GameTime gameTime)
     {
-        _gameLoop.Loop();
+        _gameLoop.Update();
         base.Update(gameTime);
     }
     protected override void Draw(GameTime gameTime)
     {
-
         Rectangle window = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
         GraphicsDevice.Clear(Color.CornflowerBlue);
