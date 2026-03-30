@@ -1,46 +1,37 @@
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace geng
+namespace geng;
+/// <summary>
+/// Interface for moveable, collidable entities.
+/// </summary>
+public interface IEntity
 {
     /// <summary>
-    /// Interface for moveable, collidable entities.
+    /// Resolve collison using x and y offset values.
     /// </summary>
-    public interface IEntity
-    {
-        /// <summary>
-        /// X and Y offsets to be used to move entity when it has collided with a tile in the map
-        /// </summary>
-        /// <param name="offSetX"></param>
-        /// <param name="offSetY"></param>
-        void ResolveCollision(int offSetX, int offSetY);
-        /// <summary>
-        /// Teleport to x, y.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        void Teleport(double x, double y);
-        void IncrementXVelocity(double xIncrement);
-        void IncrementYVelocity(double yIncrement);
-        void Draw(SpriteBatch spriteBatch);
-        
-        /// <summary>
-        /// Either 1 or -1, responds to if moving left or right
-        /// </summary>
-        int XVelocity { get; }
-        /// <summary>
-        /// Either 1 or -1, responds to if moving down or up
-        /// </summary>
-        int YVelocity { get; }
-
-        Texture2D Texture { get; }
-        Rectangle Rectangle { get; }
-        int X { get; }
-        int Y { get; }
-
-        void Update();
-
-
-    }
+    /// <param name="offSetX"></param>
+    /// <param name="offSetY"></param>
+    void ResolveCollision(int offSetX, int offSetY);
+    /// <summary>
+    /// Teleport to x, y.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    void Teleport(double x, double y);
+    void IncrementXVelocity(double xIncrement);
+    void IncrementYVelocity(double yIncrement);
+    void Draw(SpriteBatch spriteBatch);
+    void Update();
+    /// <summary>
+    /// Velocity on x axis. Can be negative/positive.
+    /// </summary>
+    int XVelocity { get; }
+    /// <summary>
+    /// Velocity on y axis. Can be negative/positive.
+    /// </summary>
+    int YVelocity { get; }
+    Texture2D Texture { get; }
+    Rectangle Rectangle { get; }
+    int X { get; }
+    int Y { get; }
 }

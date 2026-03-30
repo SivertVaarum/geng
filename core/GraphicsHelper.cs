@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace geng;
 /// <summary>
-/// Helper class for graphics
+/// Helper class for graphics.
 /// </summary>
 public static class GraphicsHelper
 {
@@ -16,7 +16,7 @@ public static class GraphicsHelper
         _graphicsDevice = device;
     }
     /// <summary>
-    /// Returns solid texture of specified color.
+    /// Returns solid texture of specified color and dimensions.
     /// </summary>
     /// <param name="color"></param>
     /// <returns></returns>
@@ -28,7 +28,7 @@ public static class GraphicsHelper
         return texture;
     }
     /// <summary>
-    /// Sets width of tiles in on screen pixels.
+    /// Sets width of tiles in onscreen pixels.
     /// Arg must be be at least 1. 
     /// </summary>
     /// <param name="newWidth"></param>
@@ -45,7 +45,7 @@ public static class GraphicsHelper
         return _tileDimension;
     }
     /// <summary>
-    /// Get texture to onscreen pixel ratio, with texture always being 1.
+    /// Get texture to onscreen pixel ratio.
     /// </summary>
     /// <returns></returns>
     public static int GetPixelRatio()
@@ -53,7 +53,7 @@ public static class GraphicsHelper
         return _pixelRatio;
     }
     /// <summary>
-    /// Set texture to onscreen pixel ratio.
+    /// Set texture to onscreen pixel ratio. Method does no calculations on its own, this should be done manually.
     /// </summary>
     /// <param name="onscreen"></param>
     /// <returns></returns>
