@@ -6,39 +6,6 @@ namespace geng;
 
 public class Player : IEntity
 {
-    public int X
-    {
-        get => (int)_x;
-    }
-    public int Y
-    {
-        get => (int)_y;
-    }
-
-    /// <summary>
-    /// Returns sign of current velocity on x axis.
-    /// </summary>
-    public int XVelocity
-    {
-        get => (int)_xVelocity;
-        set => _xVelocity = value;
-    }
-    /// <summary>
-    /// Retuns sign of current velocity on y axis.
-    /// </summary>
-    public int YVelocity
-    {
-        get => (int)_yVelocity;
-        set => _yVelocity = value;
-    }
-    public Rectangle SourceRectangle
-    {
-        get => _sourceRectangle;
-    }
-    public Rectangle Rectangle
-    {
-        get => _rectangle;
-    }    
     /// <summary>
     /// Player constructor
     /// </summary>
@@ -59,23 +26,41 @@ public class Player : IEntity
             _sourceRectangle.Width * GraphicsHelper.GetPixelRatio(),
             _sourceRectangle.Height * GraphicsHelper.GetPixelRatio());
     }
+    public int X
+    {
+        get => (int)_x;
+    }
+    public int Y
+    {
+        get => (int)_y;
+    }
 
-    /// <summary>
-    /// Overwrites player x and y field with supplied arguments
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
+    public int XVelocity
+    {
+        get => (int)_xVelocity;
+        set => _xVelocity = value;
+    }
+
+    public int YVelocity
+    {
+        get => (int)_yVelocity;
+        set => _yVelocity = value;
+    }
+    public Rectangle SourceRectangle
+    {
+        get => _sourceRectangle;
+    }
+    public Rectangle Rectangle
+    {
+        get => _rectangle;
+    }    
+
     public void Teleport(double x, double y)
     {
         _x = (int)x;
         _y = (int)y;
     }
 
-    /// <summary>
-    /// Offset vars should be supplied to let object know how far it has intersects on each axis.
-    /// </summary>
-    /// <param name="offSetX"></param>
-    /// <param name="offSetY"></param>
     public void ResolveCollision(int offSetX, int offSetY, int damage)
     {
         if (offSetX != 0)
@@ -102,23 +87,16 @@ public class Player : IEntity
         }
         _currentState = State.left;
     }
-    /// <summary>
-    /// Adds sprite to supplied SpriteBatch
-    /// </summary>
-    /// <param name="spriteBatch"></param>
-        
-        int y = 0;
+     
+    int dy = 0;
     public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet) {
-        if(_currentState == State.left) y = 8;
-        if(_currentState == State.right) y = 14;
+        if(_currentState == State.left) dy = 8;
+        if(_currentState == State.right) dy = 14;
         
-        _sourceRectangle = new Rectangle(0, y, 5, 6);
+        _sourceRectangle = new Rectangle(0, dy, 5, 6);
         spriteBatch.Draw(spritesheet, _rectangle, _sourceRectangle, Color.White);
     }
-    /// <summary>
-    /// Increment xVelocity be supplied argument.
-    /// </summary>
-    /// <param name="xIncrement"></param>
+    
     public void IncrementXVelocity(double xIncrement) {
         if(Math.Abs(_xVelocity) >= _maxVelocity)
         {
@@ -129,10 +107,7 @@ public class Player : IEntity
             _xVelocity += (int)xIncrement;
         }
     }
-    /// <summary>
-    /// Incremnet yVelocity by supplied argument.
-    /// </summary>
-    /// <param name="yIncrement"></param>
+    
     public void IncrementYVelocity(double yIncrement) {
         if(Math.Abs(_yVelocity) >= _maxVelocity)
         {

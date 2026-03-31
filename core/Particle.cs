@@ -8,7 +8,7 @@ namespace geng;
 public class Particle : IParticle
 {
     /// <summary>
-    /// Create particle with vector.
+    /// Create particle with direction using vector.
     /// </summary>
     /// <param name="originX"></param>
     /// <param name="originY"></param>
@@ -72,10 +72,7 @@ public class Particle : IParticle
                                 _sourceRectangle.Height*GraphicsHelper.GetPixelRatio());
         _timeToLive --;
     }
-    /// <summary>
-    /// Returns when particle lifespan is over.
-    /// </summary>
-    /// <returns></returns>
+
     public bool isAlive() {
         return _timeToLive > 0;
     }
