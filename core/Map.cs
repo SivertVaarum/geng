@@ -96,23 +96,23 @@ public class Map
         }
         if (offX != 0 || offY != 0)
         {
-            entity.ResolveCollision(offX, offY);
+            entity.ResolveCollision(offX, offY, 0);
         }
     }
 
     private int _tileDimension = GraphicsHelper.GetTileDimension();
     private int[,] _map = new[,]//test map
     {
-        {1,0,0,0,0,1},
+        {1,1,1,0,0,0},
         {0,0,0,0,0,0},
-        {1,0,0,0,1,1},
+        {0,0,0,0,0,0},
         {1,1,0,1,1,1}
     };
 
     /// <summary>
-    /// Loads map into 2d array
+    /// Loads map into memory
     /// </summary>
-    private void LoadMap()
+    public void LoadMap(string name)
     {
         //TODO, load maps from seperate files that will be written into the _map array.
     }
