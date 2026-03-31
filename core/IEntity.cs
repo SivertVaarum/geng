@@ -18,9 +18,25 @@ public interface IEntity
     /// <param name="x"></param>
     /// <param name="y"></param>
     void Teleport(double x, double y);
+    /// <summary>
+    /// Increment x-velocity by supplied amount.
+    /// </summary>
+    /// <param name="xIncrement"></param>
     void IncrementXVelocity(double xIncrement);
+    /// <summary>
+    /// Increment y-velocity by supplied amount.
+    /// </summary>
+    /// <param name="yIncrement"></param>
     void IncrementYVelocity(double yIncrement);
+    /// <summary>
+    /// Draw entity to supplied spritebatch.
+    /// </summary>
+    /// <param name="spriteBatch"></param>
+    /// <param name="texture"></param>
     void Draw(SpriteBatch spriteBatch, Texture2D texture);
+    /// <summary>
+    /// Update Entity state, should be called every tick.
+    /// </summary>
     void Update();
     /// <summary>
     /// Velocity on x axis. Can be negative/positive.
@@ -30,8 +46,20 @@ public interface IEntity
     /// Velocity on y axis. Can be negative/positive.
     /// </summary>
     int YVelocity { get; }
+    /// <summary>
+    /// Rectangle corresponding to the sprite in the spritesheet.
+    /// </summary>
     Rectangle SourceRectangle { get; }
+    /// <summary>
+    /// Destination rectangle.
+    /// </summary>
     Rectangle Rectangle { get; }
+    /// <summary>
+    /// Position on x axis.
+    /// </summary>
     int X { get; }
+    /// <summary>
+    /// Position on y axis.
+    /// </summary>
     int Y { get; }
 }

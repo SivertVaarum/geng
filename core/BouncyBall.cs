@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace geng;
@@ -41,7 +42,7 @@ public class BouncyBall : IParticle
     {
         if (offSetX != 0)
         {
-            _xVelocity = 0;
+            _xVelocity = -_xVelocity;
             _x += offSetX;
         }
         else if(offSetY != 0)
@@ -62,12 +63,14 @@ public class BouncyBall : IParticle
         _x += (int)_xVelocity;
         _y += (int)_yVelocity;
         applyDrag();
-        _rectangle = new Rectangle(_x, _y, _sourceRectangle.Width * GraphicsHelper.GetPixelRatio(),
-                                    _sourceRectangle.Height * GraphicsHelper.GetPixelRatio());
+        _rectangle = new Rectangle(_x, _y, 
+            _sourceRectangle.Width * GraphicsHelper.GetPixelRatio(),
+            _sourceRectangle.Height * GraphicsHelper.GetPixelRatio());
     } 
+    
     private void applyDrag()
     {
-        //if(_xVelocity < 0) _xVelocity--;
+        
     }
     private double _xVelocity;
     private double _yVelocity = 4;

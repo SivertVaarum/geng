@@ -11,8 +11,6 @@ namespace geng;
 /// </summary>
 public class ParticleMediator//SHOULD THIS BE A SINGLETON????
 {
-    private static ParticleMediator _instance;
-    private List<IParticle> _particles = new List<IParticle>();
     public List<IParticle> Particles
     {
         get => _particles;
@@ -53,7 +51,7 @@ public class ParticleMediator//SHOULD THIS BE A SINGLETON????
         _particles.Add(particle);
     }
     /// <summary>
-    /// Updates particles and dereferences particles which exceed <see cref ="Particle._timeToLive">
+    /// Updates living particles.
     /// </summary>
     public void Update()
     {
@@ -64,14 +62,16 @@ public class ParticleMediator//SHOULD THIS BE A SINGLETON????
         _particles.RemoveAll( IParticle => !IParticle.isAlive());
     }
     /// <summary>
-    /// Draws particle to supplied spritebatch.
+    /// Draws particles to supplied spritebatch.
     /// </summary>
     /// <param name="spriteBatch"></param>
     public void Draw(SpriteBatch spriteBatch)
     {
         foreach(IParticle p in _particles)
         {
-            p.Draw(spriteBatch, TextureRegister.Spritesheet);
+            p.Draw(spriteBatch, TextureRegister.MainSpritesheet);
         }
     }
+    private static ParticleMediator _instance;
+    private List<IParticle> _particles = new List<IParticle>();
 }
