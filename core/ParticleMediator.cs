@@ -71,7 +71,7 @@ public class ParticleMediator//SHOULD THIS BE A SINGLETON????
     {
         foreach(IParticle p in _particles)
         {
-            spriteBatch.Draw(p.Texture, p.Rectangle, Color.White);
+            p.Draw(spriteBatch, TextureRegister.Spritesheet);
         }
     }
 }

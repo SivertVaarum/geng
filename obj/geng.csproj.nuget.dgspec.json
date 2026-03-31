@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sivert\\source\\repos\\geng\\game\\geng.csproj": {}
+    "C:\\Users\\Sivert\\source\\repos\\personlig\\c#\\geng\\geng.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sivert\\source\\repos\\geng\\game\\geng.csproj": {
+    "C:\\Users\\Sivert\\source\\repos\\personlig\\c#\\geng\\geng.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sivert\\source\\repos\\geng\\game\\geng.csproj",
+        "projectUniqueName": "C:\\Users\\Sivert\\source\\repos\\personlig\\c#\\geng\\geng.csproj",
         "projectName": "geng",
-        "projectPath": "C:\\Users\\Sivert\\source\\repos\\geng\\game\\geng.csproj",
+        "projectPath": "C:\\Users\\Sivert\\source\\repos\\personlig\\c#\\geng\\geng.csproj",
         "packagesPath": "C:\\Users\\Sivert\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sivert\\source\\repos\\geng\\game\\obj\\",
+        "outputPath": "C:\\Users\\Sivert\\source\\repos\\personlig\\c#\\geng\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sivert\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -20,9 +20,7 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.emzi0767.com/api/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -69,19 +67,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.24, 8.0.24]"
+              "version": "[8.0.23, 8.0.23]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.24, 8.0.24]"
+              "version": "[8.0.23, 8.0.23]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.24, 8.0.24]"
+              "version": "[8.0.23, 8.0.23]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.24, 8.0.24]"
+              "version": "[8.0.23, 8.0.23]"
             }
           ],
           "frameworkReferences": {
@@ -89,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

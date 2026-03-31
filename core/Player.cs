@@ -31,16 +31,14 @@ public class Player : IEntity
         get => (int)_yVelocity;
         set => _yVelocity = value;
     }
+    public Rectangle SourceRectangle
+    {
+        get => _sourceRectangle;
+    }
     public Rectangle Rectangle
     {
         get => _rectangle;
-    }
-    public Texture2D Texture
-    {
-        get => _texture;
-        set => _texture = value;
-    }
-    
+    }    
     /// <summary>
     /// Player constructor
     /// </summary>
@@ -49,16 +47,19 @@ public class Player : IEntity
     /// <param name="y"></param>
     /// <param name="width"></param>
     /// <param name="height"></param>
-    public Player(Texture2D texture, int x, int y, int width, int height)
+    public Player(Rectangle sourceRectangle, int x, int y, int width, int height)
     {
         _playerController = new PlayerController(this);
-        _texture = texture;
+        _sourceRectangle = sourceRectangle;
         _x = x;
         _y = y;
         _height = height;
         _width = width;
-        _rectangle = new Rectangle((int)_x, (int)_y, _texture.Bounds.Width*GraphicsHelper.GetPixelRatio(), _texture.Bounds.Height*GraphicsHelper.GetPixelRatio());
+        _rectangle = new Rectangle((int)_x, (int)_y, 
+            _sourceRectangle.Width * GraphicsHelper.GetPixelRatio(),
+            _sourceRectangle.Height * GraphicsHelper.GetPixelRatio());
     }
+
 
     /// <summary>
     /// Overwrites player x and y field with supplied arguments
@@ -95,13 +96,25 @@ public class Player : IEntity
         UpdatePosition();
         _playerController.CheckInput();
         _rectangle = new Rectangle((int)_x, (int)_y, _width, _height);
+        if (_xVelocity > 0)
+        {
+            _currentState = State.right;
+            return;
+        }
+        _currentState = State.left;
     }
     /// <summary>
     /// Adds sprite to supplied SpriteBatch
     /// </summary>
     /// <param name="spriteBatch"></param>
-    public void Draw(SpriteBatch spriteBatch) {
-        spriteBatch.Draw(_texture, _rectangle, Color.White);
+        
+        int y = 0;
+    public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet) {
+        if(_currentState == State.left) y = 8;
+        if(_currentState == State.right) y = 14;
+        
+        _sourceRectangle = new Rectangle(0, y, 5, 6);
+        spriteBatch.Draw(spritesheet, _rectangle, _sourceRectangle, Color.White);
     }
     /// <summary>
     /// Increment xVelocity be supplied argument.
@@ -142,13 +155,18 @@ public class Player : IEntity
         if(_xVelocity != 0)_xVelocity -= _drag * Math.Sign(_xVelocity);
         if(_yVelocity != 0)_yVelocity -= _drag * Math.Sign(_yVelocity);
     }
-private const int _maxVelocityIncrement = 2;
-private int _maxVelocity = 4;
-private float _x, _y;
-private int _height, _width;
-private float _xVelocity, _yVelocity;
-private float _drag = 0.5f;
-private Rectangle _rectangle;
-private Texture2D _texture;
-private PlayerController _playerController;
+    private const int _maxVelocityIncrement = 2;
+    private int _maxVelocity = 4;
+    private float _x, _y;
+    private int _height, _width;
+    private float _xVelocity, _yVelocity;
+    private float _drag = 0.5f;
+    private Rectangle _rectangle;
+    private Rectangle _sourceRectangle;
+    private PlayerController _playerController;
+    private enum State
+    {
+        left, right
+    }
+    private State _currentState = State.right;
 }

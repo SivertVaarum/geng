@@ -13,25 +13,22 @@ public class Particle : IParticle
     /// <param name="originX"></param>
     /// <param name="originY"></param>
     /// <param name="direction"></param>
-    public Particle(int originX, int originY, Vector2 direction, Color color) {
+    public Particle(int originX, int originY, Vector2 direction, Rectangle sourceRectangle) {
         _x = originX;
         _y = originY; 
         _xVelocity = (int)direction.X;
         _yVelocity = (int)direction.Y;
-        _texture = GraphicsHelper.CreateSolid(color, 1, 1);
+        _sourceRectangle = sourceRectangle;
     }
     /// <summary>
     /// Create particle without direction.
     /// </summary>
     /// <param name="originX"></param>
     /// <param name="originY"></param>
-    public Particle(int originX, int originY, Color color) {
+    public Particle(int originX, int originY, Rectangle sourceRectangle) {
         _x = originX;
         _y = originY; 
-        _texture = GraphicsHelper.CreateSolid(color, 1, 1);
-    }
-    public Texture2D Texture {
-        get => _texture;
+        _sourceRectangle = sourceRectangle;
     }
     public int XVelocity {
         get => _xVelocity;
@@ -48,11 +45,15 @@ public class Particle : IParticle
     public Rectangle Rectangle {
         get => _rectangle;
     }
+    public Rectangle SourceRectangle
+    {
+        get => _sourceRectangle;
+    }
     public void ResolveCollision(int offSetX, int offSetY) {
         //¯\_(ツ)_/¯
     }
-    public void Draw(SpriteBatch spriteBatch) {
-        spriteBatch.Draw(_texture, _rectangle, Color.White);
+    public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet) {
+        spriteBatch.Draw(spritesheet, _rectangle, _sourceRectangle, Color.White);
     }
     public void Teleport(double x, double y) {
         _x = (int)x;
@@ -67,7 +68,8 @@ public class Particle : IParticle
     public void Update() {
         _x += _xVelocity;
         _y += _yVelocity;
-        _rectangle = new Rectangle(_x, _y, _texture.Bounds.Width*GraphicsHelper.GetPixelRatio(), _texture.Bounds.Height*GraphicsHelper.GetPixelRatio());
+        _rectangle = new Rectangle(_x, _y, _sourceRectangle.Width*GraphicsHelper.GetPixelRatio(), 
+                                _sourceRectangle.Height*GraphicsHelper.GetPixelRatio());
         _timeToLive --;
     }
     /// <summary>
@@ -79,7 +81,7 @@ public class Particle : IParticle
     }
     private  int _xVelocity, _yVelocity; 
     private int _x, _y;
-    private Texture2D _texture;
-    private Rectangle _rectangle;
+    private Rectangle _sourceRectangle;
+    private Rectangle _rectangle = new Rectangle(0,0,0,0 );
     private int _timeToLive = 256;
 }

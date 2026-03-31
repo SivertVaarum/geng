@@ -29,8 +29,9 @@ internal class Game1 : Game
         GraphicsHelper.Initialize(GraphicsDevice);
         GraphicsHelper.SetTileDimension(128);
         GraphicsHelper.SetPixelRatio(32);
+        TextureRegister.Spritesheet = _gengSpritesheet;
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
-        _gameLoop = new GameLoop(GraphicsDevice, _gengSpritesheet);
+        _gameLoop = new GameLoop(GraphicsDevice);
     }
 
     protected override void LoadContent()
@@ -47,11 +48,11 @@ internal class Game1 : Game
     {
         Rectangle window = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
-        GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         //Sets RenderTarget to custom RenderTarget
         GraphicsDevice.SetRenderTarget(_renderTarget);
+        GraphicsDevice.Clear(Color.CornflowerBlue);
         _gameLoop.Draw(_spriteBatch); 
         _spriteBatch.End();
 

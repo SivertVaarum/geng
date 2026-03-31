@@ -20,7 +20,7 @@ public interface IEntity
     void Teleport(double x, double y);
     void IncrementXVelocity(double xIncrement);
     void IncrementYVelocity(double yIncrement);
-    void Draw(SpriteBatch spriteBatch);
+    void Draw(SpriteBatch spriteBatch, Texture2D texture);
     void Update();
     /// <summary>
     /// Velocity on x axis. Can be negative/positive.
@@ -30,7 +30,7 @@ public interface IEntity
     /// Velocity on y axis. Can be negative/positive.
     /// </summary>
     int YVelocity { get; }
-    Texture2D Texture { get; }
+    Rectangle SourceRectangle { get; }
     Rectangle Rectangle { get; }
     int X { get; }
     int Y { get; }

@@ -15,6 +15,10 @@ public static class GraphicsHelper
     {
         _graphicsDevice = device;
     }
+    public static GraphicsDevice GetGraphicsDevice()
+    {
+        return _graphicsDevice;
+    }
     /// <summary>
     /// Returns solid texture of specified color and dimensions.
     /// </summary>
