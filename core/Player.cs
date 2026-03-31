@@ -60,7 +60,6 @@ public class Player : IEntity
             _sourceRectangle.Height * GraphicsHelper.GetPixelRatio());
     }
 
-
     /// <summary>
     /// Overwrites player x and y field with supplied arguments
     /// </summary>
@@ -77,7 +76,7 @@ public class Player : IEntity
     /// </summary>
     /// <param name="offSetX"></param>
     /// <param name="offSetY"></param>
-    public void ResolveCollision(int offSetX, int offSetY)
+    public void ResolveCollision(int offSetX, int offSetY, int damage)
     {
         if (offSetX != 0)
         {

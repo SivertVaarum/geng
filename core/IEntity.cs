@@ -11,7 +11,7 @@ public interface IEntity
     /// </summary>
     /// <param name="offSetX"></param>
     /// <param name="offSetY"></param>
-    void ResolveCollision(int offSetX, int offSetY);
+    void ResolveCollision(int offSetX, int offSetY, int damage);
     /// <summary>
     /// Teleport to x, y.
     /// </summary>

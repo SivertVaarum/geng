@@ -49,7 +49,7 @@ public class Particle : IParticle
     {
         get => _sourceRectangle;
     }
-    public void ResolveCollision(int offSetX, int offSetY) {
+    public void ResolveCollision(int offSetX, int offSetY, int damage) {
         //¯\_(ツ)_/¯
     }
     public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet) {
