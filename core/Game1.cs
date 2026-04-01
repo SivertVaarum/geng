@@ -29,7 +29,7 @@ internal class Game1 : Game
         GraphicsHelper.Initialize(GraphicsDevice);
         GraphicsHelper.SetTileDimension(128);
         GraphicsHelper.SetPixelRatio(32);
-        TextureRegister.Spritesheet = _gengSpritesheet;
+        TextureRegister.MainSpritesheet = _gengSpritesheet;
         _renderTarget = new RenderTarget2D(GraphicsDevice, _nativeWidth, _nativeHeigth);
         _gameLoop = new GameLoop(GraphicsDevice);
     }
