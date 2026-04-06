@@ -9,7 +9,7 @@ namespace geng;
 /// Pipeline for making new particle.
 /// Singleton to make it possible to create new particles from any scope.
 /// </summary>
-public class ParticleMediator//SHOULD THIS BE A SINGLETON????
+public class ParticleHandler//SHOULD THIS BE A SINGLETON????
 {
     public List<IParticle> Particles
     {
@@ -20,16 +20,16 @@ public class ParticleMediator//SHOULD THIS BE A SINGLETON????
         Blood,
         Water
     }
-    private ParticleMediator() { }
+    private ParticleHandler() { }
     /// <summary>
     /// Gets instance of the particleMediator
     /// </summary>
     /// <returns>Instance of ParticleMediator</returns>
-    public static ParticleMediator GetInstance()
+    public static ParticleHandler GetInstance()
     {
         if (_instance == null)
         {
-            _instance = new ParticleMediator();
+            _instance = new ParticleHandler();
         }
         return _instance;
     }
@@ -72,6 +72,6 @@ public class ParticleMediator//SHOULD THIS BE A SINGLETON????
             p.Draw(spriteBatch, TextureRegister.MainSpritesheet);
         }
     }
-    private static ParticleMediator _instance;
+    private static ParticleHandler _instance;
     private List<IParticle> _particles = new List<IParticle>();
 }
