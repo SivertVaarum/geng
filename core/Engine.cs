@@ -12,6 +12,7 @@ public static class Engine
         if(_services.ContainsKey(type)) throw new InvalidOperationException("Service already registered"); 
         _services.Add(type, service); 
     }
+    //Unregister??
     public static T Get<T>() where T : class, IService
     {
         Type type = typeof(T);
@@ -20,9 +21,8 @@ public static class Engine
         {
             return (T)service;
         }
-        throw new KeyNotFoundException("Service of '{type.name}' is not registered");
+        throw new KeyNotFoundException("Service of '{type.name}' is not registered");//Passende?
     }
     
     private static Dictionary<Type, IService> _services = new(); 
-    
 }
